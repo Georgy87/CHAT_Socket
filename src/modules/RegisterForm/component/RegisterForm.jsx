@@ -1,7 +1,8 @@
 import React from "react";
 import { Form, Input } from "antd";
-import { SmileOutlined } from '@ant-design/icons';
+import { MailOutlined, UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+
 
 import { Button, Block } from "../../../components";
 
@@ -41,7 +42,7 @@ const RegisterForm = (props) => {
                             <Input
                                 id="email"
                                 prefix={
-                                    <SmileOutlined
+                                    <MailOutlined
                                         type="mail"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />
@@ -56,7 +57,7 @@ const RegisterForm = (props) => {
                         <Form.Item>
                             <Input
                                 prefix={
-                                    <SmileOutlined
+                                    <UserOutlined
                                         type="user"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />
@@ -79,7 +80,7 @@ const RegisterForm = (props) => {
                             <Input
                                 id="password"
                                 prefix={
-                                    <SmileOutlined
+                                    <LockOutlined
                                         type="lock"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />
@@ -95,7 +96,7 @@ const RegisterForm = (props) => {
                         <Form.Item>
                             <Input
                                 prefix={
-                                    <SmileOutlined
+                                    <LockOutlined
                                         type="lock"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />

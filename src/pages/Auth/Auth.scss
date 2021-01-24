@@ -17,6 +17,18 @@
             opacity: 0.5;
         }
     }
+    &__success-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        height: 400px;
+        svg {
+          width: 48px;
+          height: 48px;
+        }
+    }
     &__register-link {
         text-align: center;
     }
