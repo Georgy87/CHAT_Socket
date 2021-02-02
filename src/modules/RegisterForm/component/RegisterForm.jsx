@@ -1,8 +1,13 @@
 import React from "react";
 import { Form, Input } from "antd";
-import { MailOutlined, UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
+import Icon, {
+    MailOutlined,
+    UserOutlined,
+    LockOutlined,
+    SmileOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
+import validateField from "../../../utils/helpers/validateField";
 
 import { Button, Block } from "../../../components";
 
@@ -25,24 +30,22 @@ const RegisterForm = (props) => {
                 <h2>Регистрация</h2>
                 <p>Для входа в чат, вам нужно зарегистрироваться</p>
             </div>
-            <Block>
+            <Block name="Пока">
                 {!success ? (
                     <Form onSubmit={handleSubmit} className="login-form">
                         <Form.Item
-                            validateStatus={
-                                !touched.email
-                                    ? ""
-                                    : errors.email
-                                    ? "error"
-                                    : "success"
-                            }
+                            validateStatus={validateField(
+                                "email",
+                                touched,
+                                errors
+                            )}
                             help={!touched.email ? "" : errors.email}
                             hasFeedback
                         >
                             <Input
                                 id="email"
                                 prefix={
-                                    <MailOutlined
+                                    <Icon
                                         type="mail"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />
@@ -57,7 +60,7 @@ const RegisterForm = (props) => {
                         <Form.Item>
                             <Input
                                 prefix={
-                                    <UserOutlined
+                                    <Icon
                                         type="user"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />
@@ -67,20 +70,18 @@ const RegisterForm = (props) => {
                             />
                         </Form.Item>
                         <Form.Item
-                            validateStatus={
-                                !touched.password
-                                    ? ""
-                                    : errors.password
-                                    ? "error"
-                                    : "success"
-                            }
+                            validateStatus={validateField(
+                                "password",
+                                touched,
+                                errors
+                            )}
                             help={!touched.password ? "" : errors.password}
                             hasFeedback
                         >
                             <Input
                                 id="password"
                                 prefix={
-                                    <LockOutlined
+                                    <Icon
                                         type="lock"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />
@@ -93,16 +94,22 @@ const RegisterForm = (props) => {
                                 onBlur={handleBlur}
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            validateStatus={validateField(
+                                "password",
+                                touched,
+                                errors
+                            )}
+                        >
                             <Input
                                 prefix={
-                                    <LockOutlined
+                                    <Icon
                                         type="lock"
                                         style={{ color: "rgba(0,0,0,.25)" }}
                                     />
                                 }
                                 size="large"
-                                type="password"
+                                type="password2"
                                 placeholder="Повторите пароль"
                             />
                         </Form.Item>
@@ -123,7 +130,7 @@ const RegisterForm = (props) => {
                 ) : (
                     <div className="auth__success-block">
                         <div>
-                            <SmileOutlined type="info-circle" theme="twoTone" />
+                            <Icon type="info-circle" theme="twoTone" />
                         </div>
                         <h2>Подтвердите свой аккаунт</h2>
                         <p>

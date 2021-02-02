@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 const App = ()=> {
     return (
         <div className="wrapper">
-           <Route exact path={["/", "/login", "/register"]} component={Auth} />
+            <Route exact path={["/", "/login", "/register"]} component={Auth} />
             <Route exact path="/im" component={Home} />
         </div>
     )
