@@ -8,13 +8,11 @@ import noReadedSvg from "../../assets/img/noreaded.svg";
 import waveSvg from "../../assets/img/wave.svg";
 import playSvg from "../../assets/img/play.svg";
 import pauseSvg from "../../assets/img/pause.svg";
+import { convertCurrentTime } from "../../utils/helpers";
 
 import "./Message.scss";
 
 const MessageAudio = ({ audioSrc }) => {
-
-    console.log(audioSrc);
-
     const audioElem = React.useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -54,8 +52,7 @@ const MessageAudio = ({ audioSrc }) => {
             false
         );
         audioElem.current.addEventListener("timeupdate", () => {
-            const duration =
-                (audioElem.current && audioElem.current.duration) || 0;
+            const duration = (audioElem.current && audioElem.current.duration) || 0;
             setCurrentTime(audioElem.current.currentTime);
             setProgress((audioElem.current.currentTime / duration) * 100);
         });
@@ -82,7 +79,7 @@ const MessageAudio = ({ audioSrc }) => {
                     <img src={waveSvg} alt="Wave svg" />
                 </div>
                 <span className="message__audio-duration">
-                    {/* {convertCurrentTime(currentTime)} */}
+                    {convertCurrentTime(currentTime)}
                 </span>
             </div>
         </div>

@@ -5,16 +5,17 @@ import Time from "../Time/index";
 import isToday from "date-fns/isToday";
 import format from "date-fns/format";
 import ruLocale from "date-fns/locale/ru";
-
+import { generateAvatarFromHash } from "../../utils/helpers";
+import IconReaded from "../IconReaded/index";
+import Avatar from "../Avatar/index";
 import "./DialogItem.scss";
 
-import IconReaded from "../IconReaded/index";
 
 const getMessageTime = (created_at) => {
 
-    // return format(created_at, "HH:mm", {
-    //             locale: ruLocale,
-    //         })
+    // created_at: "2021, 1, 2"
+
+    // created_at: "new Data()"
 
     if (isToday(new Date(created_at))) {
         return format(created_at, "HH:mm");
@@ -25,18 +26,18 @@ const getMessageTime = (created_at) => {
     }
 };
 
-const getAvatar = (avatar) => {
-    if (avatar) {
-        return (
-            <img
-                src="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
-                alt=""
-            />
-        );
-    } else {
-        // make avatar
-    }
-};
+// const getAvatar = (avatar) => {
+//     if (avatar) {
+//         return (
+//             <img
+//                 src="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+//                 alt=""
+//             />
+//         );
+//     } else {
+//         console.log(generateAvatarFromHash("01d981925251b06de143439f55a8cd4c"))
+//     }
+// };
 
 const DialogItem = ({ user, unreaded, created_at, isMe, text }) => {
     return (
@@ -46,7 +47,7 @@ const DialogItem = ({ user, unreaded, created_at, isMe, text }) => {
             })}
         >
             <div className="dialogs__item-avatar">
-                {getAvatar(user.avatar)}
+                {Avatar(user)}
             </div>
             <div className="dialogs__item-info">
                 <div className="dialogs__item-info-top">
