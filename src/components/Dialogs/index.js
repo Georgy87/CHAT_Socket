@@ -1,5 +1,6 @@
 import React from "react";
 import orderBy from "lodash/orderBy";
+
 import "./Dialogs.scss";
 
 import DialogItem from "../DialogItem/DialogItem";

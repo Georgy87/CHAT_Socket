@@ -8,15 +8,8 @@ import ruLocale from "date-fns/locale/ru";
 import { generateAvatarFromHash } from "../../utils/helpers";
 import IconReaded from "../IconReaded/index";
 import Avatar from "../Avatar/index";
-import "./DialogItem.scss";
-
 
 const getMessageTime = (created_at) => {
-
-    // created_at: "2021, 1, 2"
-
-    // created_at: "new Data()"
-
     if (isToday(new Date(created_at))) {
         return format(created_at, "HH:mm");
     } else {
@@ -25,19 +18,6 @@ const getMessageTime = (created_at) => {
         });
     }
 };
-
-// const getAvatar = (avatar) => {
-//     if (avatar) {
-//         return (
-//             <img
-//                 src="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
-//                 alt=""
-//             />
-//         );
-//     } else {
-//         console.log(generateAvatarFromHash("01d981925251b06de143439f55a8cd4c"))
-//     }
-// };
 
 const DialogItem = ({ user, unreaded, created_at, isMe, text }) => {
     return (

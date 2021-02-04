@@ -6,12 +6,15 @@ import {
     TeamOutlined,
     FormOutlined,
     EllipsisOutlined,
+    SmileOutlined,
 } from "@ant-design/icons";
 import Icon from "@ant-design/icons";
 import { Form, Search, Input, Button, Checkbox } from "antd";
 // import { Input }from "antd}"
 
 import "./Home.scss";
+import Status from "../../components/Status/index";
+import ChatInput from "../../components/ChatInput/index";
 
 const Home = () => {
     return (
@@ -23,7 +26,11 @@ const Home = () => {
                             <Icon component={TeamOutlined} />
                             <span>Список диалогов</span>
                         </div>
-                        <Icon component={FormOutlined} />
+                        <Button
+                            type="link"
+                            shape="circle"
+                            icon={<FormOutlined />}
+                        />
                     </div>
                     <div className="chat__sidebar-search">
                         <Input.Search
@@ -180,146 +187,232 @@ const Home = () => {
                                         avatar: null,
                                     },
                                 },
+                                {
+                                    _id: "051abed2f580f470df2535b5",
+                                    text:
+                                        "Veniam ex irure adipisicing aute commodo voluptate sint laboris nulla sint nostrud proident sunt ullamco. Cillum reprehenderit occaecat dolore in eiusmod excepteur voluptate cillum. Non voluptate pariatur Lorem velit cupidatat cillum. Officia elit ipsum ad aute reprehenderit sint pariatur sint. Aute dolore commodo veniam aute aute magna ullamco dolor minim sint nisi commodo adipisicing.",
+                                    created_at:
+                                        "Thu Oct 20 1988 09:34:48 GMT+0300 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "rty2u01abed20b857e3f1d320f4d",
+                                        fullname: "Terry Stark",
+                                        avatar: null,
+                                    },
+                                },
+                                {
+                                    _id: "781abed2e661e65e74f06d3c",
+                                    text:
+                                        "Commodo labore sit fugiat aliqua ut proident esse. In magna aute adipisicing qui est consectetur veniam occaecat sunt. Incididunt elit amet ipsum culpa minim sunt amet esse. Et eu tempor consectetur in officia officia non aliquip eu ut culpa in consectetur cupidatat. Enim amet amet ex deserunt veniam consectetur velit nisi.",
+                                    created_at:
+                                        "Thu Aug 02 2012 07:44:28 GMT+0400 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "3rt6i1abed21e03c086de7da2b5",
+                                        fullname: "Patrica Faulkner",
+                                        avatar: null,
+                                    },
+                                },
+                                {
+                                    _id: "i51abed2f580f470df2535b5",
+                                    text:
+                                        "Veniam ex irure adipisicing aute commodo voluptate sint laboris nulla sint nostrud proident sunt ullamco. Cillum reprehenderit occaecat dolore in eiusmod excepteur voluptate cillum. Non voluptate pariatur Lorem velit cupidatat cillum. Officia elit ipsum ad aute reprehenderit sint pariatur sint. Aute dolore commodo veniam aute aute magna ullamco dolor minim sint nisi commodo adipisicing.",
+                                    created_at:
+                                        "Thu Oct 20 1988 09:34:48 GMT+0300 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "r987y2u01abed20b857e3f1d320f4d",
+                                        fullname: "Terry Stark",
+                                        avatar: null,
+                                    },
+                                },
+                                {
+                                    _id: "751abed2e661e65e74f06d3c",
+                                    text:
+                                        "Commodo labore sit fugiat aliqua ut proident esse. In magna aute adipisicing qui est consectetur veniam occaecat sunt. Incididunt elit amet ipsum culpa minim sunt amet esse. Et eu tempor consectetur in officia officia non aliquip eu ut culpa in consectetur cupidatat. Enim amet amet ex deserunt veniam consectetur velit nisi.",
+                                    created_at:
+                                        "Thu Aug 02 2012 07:44:28 GMT+0400 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "trt6i1abed21e03c086de7da2b5",
+                                        fullname: "Patrica Faulkner",
+                                        avatar: null,
+                                    },
+                                },
+                                {
+                                    _id: "i51abed2f580f470df2535b5",
+                                    text:
+                                        "Veniam ex irure adipisicing aute commodo voluptate sint laboris nulla sint nostrud proident sunt ullamco. Cillum reprehenderit occaecat dolore in eiusmod excepteur voluptate cillum. Non voluptate pariatur Lorem velit cupidatat cillum. Officia elit ipsum ad aute reprehenderit sint pariatur sint. Aute dolore commodo veniam aute aute magna ullamco dolor minim sint nisi commodo adipisicing.",
+                                    created_at:
+                                        "Thu Oct 20 1988 09:34:48 GMT+0300 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "r987y2u01abed20b857e3f1d320f4d",
+                                        fullname: "Terry Stark",
+                                        avatar: null,
+                                    },
+                                },
+                                {
+                                    _id: "751abed2e661e65e74f06d3c",
+                                    text:
+                                        "Commodo labore sit fugiat aliqua ut proident esse. In magna aute adipisicing qui est consectetur veniam occaecat sunt. Incididunt elit amet ipsum culpa minim sunt amet esse. Et eu tempor consectetur in officia officia non aliquip eu ut culpa in consectetur cupidatat. Enim amet amet ex deserunt veniam consectetur velit nisi.",
+                                    created_at:
+                                        "Thu Aug 02 2012 07:44:28 GMT+0400 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "trt6i1abed21e03c086de7da2b5",
+                                        fullname: "Patrica Faulkner",
+                                        avatar: null,
+                                    },
+                                },
+                                {
+                                    _id: "i51abed2f580f470df2535b5",
+                                    text:
+                                        "Veniam ex irure adipisicing aute commodo voluptate sint laboris nulla sint nostrud proident sunt ullamco. Cillum reprehenderit occaecat dolore in eiusmod excepteur voluptate cillum. Non voluptate pariatur Lorem velit cupidatat cillum. Officia elit ipsum ad aute reprehenderit sint pariatur sint. Aute dolore commodo veniam aute aute magna ullamco dolor minim sint nisi commodo adipisicing.",
+                                    created_at:
+                                        "Thu Oct 20 1988 09:34:48 GMT+0300 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "rrt387y2u01abed20b857e3f1d320f4d",
+                                        fullname: "Terry Stark",
+                                        avatar: null,
+                                    },
+                                },
+                                {
+                                    _id: "751abed2e661e65e74f06d3c",
+                                    text:
+                                        "Commodo labore sit fugiat aliqua ut proident esse. In magna aute adipisicing qui est consectetur veniam occaecat sunt. Incididunt elit amet ipsum culpa minim sunt amet esse. Et eu tempor consectetur in officia officia non aliquip eu ut culpa in consectetur cupidatat. Enim amet amet ex deserunt veniam consectetur velit nisi.",
+                                    created_at:
+                                        "Thu Aug 02 2012 07:44:28 GMT+0400 (Москва, стандартное время)",
+                                    user: {
+                                        _id: "tsdft6i1abed21e03c086de7da2b5",
+                                        fullname: "Patrica Faulkner",
+                                        avatar: null,
+                                    },
+                                },
+
                             ]}
                         />
                     </div>
                 </div>
                 <div className="chat__dialog">
                     <div className="chat__dialog-header">
+                        <div />
                         <div className="chat__dialog-header-center">
-                            <div className="chat__dialog-header-fullname">
-                                <b>Георгий Петренко</b>
-                                <div className="chat__dialog-header-status">
-                                    <div className="status status--online"></div>
-                                </div>
+                            <b className="chat__dialog-header-username">
+                                Георгий Петренко
+                            </b>
+                            <div className="chat__dialog-header-status">
+                                <Status online />
                             </div>
-                            <Icon component={EllipsisOutlined} />
+                            <Button
+                                type="link"
+                                shape="circle"
+                                icon={<EllipsisOutlined />}
+                                style={{ fontSize: "20px" }}
+                            />
                         </div>
+                    </div>
+                    <div className="chat__dialog-messages">
+                        <Message
+                            avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+                            date="Sun Apr 21 2019 21:55:29"
+                            audio={tr}
+                        />
+                        <Message
+                            avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+                            isTyping
+                        />
+
+                        <Message
+                            avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+                            text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях, лол 🌝"
+                            date="Sun Apr 21 2019 21:55:29"
+                            attachments={[
+                                {
+                                    filename: "image.jpg",
+                                    url:
+                                        "https://source.unsplash.com/100x100/?random=1&nature,water",
+                                },
+                                {
+                                    filename: "image.jpg",
+                                    url:
+                                        "https://source.unsplash.com/100x100/?random=2&nature,water",
+                                },
+                                {
+                                    filename: "image.jpg",
+                                    url:
+                                        "https://source.unsplash.com/100x100/?random=3&nature,water",
+                                },
+                            ]}
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                            isMe={true}
+                            isReaded={false}
+                        />
+                        <Message
+                            avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+                            attachments={[
+                                {
+                                    filename: "image.jpg",
+                                    url:
+                                        "https://source.unsplash.com/100x100/?random=1&nature,water",
+                                },
+                            ]}
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                          <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                          <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+                        <Message
+                            avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+                            text="Hello, World!"
+                            date="Sun Apr 21 2019 21:59:29"
+                        />
+
+                    </div>
+                    <div className="chat__dialog-input">
+                        <ChatInput />
                     </div>
                 </div>
             </div>
-            {/* <Dialogs
-                userId={0}
-                items={[
-                    {
-                        _id: "01d981925251b06de143439f55a8cd4c",
-                        text:
-                            "Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях.",
-
-                        created_at: "2021, 1, 2",
-                        user: {
-                            _id: "41y981925251b06de143439f55a8cd4c",
-                            fullname: "Федор достоевский",
-                            avatar: null,
-                        },
-                    },
-                ]}
-            />
-
-            <Dialogs
-                userId={0}
-                items={[
-                    {
-                        _id: Math.random(),
-                        text: "Как ты бро?",
-
-                        created_at: new Date(),
-                        user: {
-                            _id: "01d981925251b06de143439f55a8cd4c",
-                            fullname: "Георгий Петренко",
-                            avatar:
-                                "https://upload.wikimedia.org/wikipedia/commons/0/00/%22Hidden_Figures%22_Screening_at_NMAAHC_%28NHQ201612140033%29_%28cropped%29.jpg",
-                        },
-                    },
-                ]}
-            />
-
-            <Dialogs
-                userId={0}
-                items={[
-                    {
-                        _id: Math.random(),
-                        text: "Hello",
-
-                        created_at: new Date(),
-                        user: {
-                            _id: "333981925251b06de143439f55a8cd4c",
-                            fullname: "Дима Билан",
-                            avatar: null,
-                        },
-                    },
-                ]}
-            />
-
-            <Dialogs
-                userId={0}
-                items={[
-                    {
-                        _id: Math.random(),
-                        text: "Привет всем",
-
-                        created_at: new Date(),
-                        user: {
-                            _id: "781981925251b06de143439f55a8cd4c",
-                            fullname: "Ян Измайлов",
-                            avatar: null,
-                        },
-                    },
-                ]}
-            /> */}
-
-            {/* <Message
-                avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
-                date="Sun Apr 21 2019 21:55:29"
-                audio={tr}
-            /> */}
-            {/* <Message
-                avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
-                isTyping
-            /> */}
-            {/* <Message
-                avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
-                text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях, лол 🌝"
-                date="Sun Apr 21 2019 21:55:29"
-                attachments={[
-                    {
-                        filename: "image.jpg",
-                        url:
-                            "https://source.unsplash.com/100x100/?random=1&nature,water",
-                    },
-                    {
-                        filename: "image.jpg",
-                        url:
-                            "https://source.unsplash.com/100x100/?random=2&nature,water",
-                    },
-                    {
-                        filename: "image.jpg",
-                        url:
-                            "https://source.unsplash.com/100x100/?random=3&nature,water",
-                    },
-                ]}
-            />
-            <Message
-                avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
-                text="Hello, World!"
-                date="Sun Apr 21 2019 21:59:29"
-                isMe={true}
-                isReaded={false}
-            />
-            <Message
-                avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
-                attachments={[
-                    {
-                        filename: "image.jpg",
-                        url:
-                            "https://source.unsplash.com/100x100/?random=1&nature,water",
-                    },
-                ]}
-            />
-            <Message
-                avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
-                isTyping
-            /> */}
         </section>
     );
 };
