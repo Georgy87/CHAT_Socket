@@ -3,7 +3,7 @@ import { Dialogs as BaseDialogs } from "../components";
 import { connect } from "react-redux";
 import { dialogsActions } from "../redux/actions";
 
-const Dialogs = ({ fetchDialogs, items, userId }) => {
+const Dialogs = ({ fetchDialogs, items, userId, setCurrentDialogId }) => {
     const [inputValue, setValue] = useState("");
     const [filtred, setFiltredItems] = useState(Array.from(items));
 
@@ -22,8 +22,14 @@ const Dialogs = ({ fetchDialogs, items, userId }) => {
     useEffect(() => {
         if (!items.length) {
             fetchDialogs();
+        } else {
+            setFiltredItems(items);
         }
-    }, []);
+    }, [items]);
+
+    // const onSelectDialog = () => {
+
+    // }
 
     return (
         <BaseDialogs
@@ -31,6 +37,7 @@ const Dialogs = ({ fetchDialogs, items, userId }) => {
             items={filtred}
             onSearch={onChangeInput}
             inputValue={inputValue}
+            onSelectDialog={setCurrentDialogId}
         />
     );
 };

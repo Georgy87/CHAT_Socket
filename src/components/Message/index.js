@@ -9,6 +9,7 @@ import waveSvg from "../../assets/img/wave.svg";
 import playSvg from "../../assets/img/play.svg";
 import pauseSvg from "../../assets/img/pause.svg";
 import { convertCurrentTime } from "../../utils/helpers";
+import Avatar from '../Avatar/index';
 
 import "./Message.scss";
 
@@ -52,7 +53,8 @@ const MessageAudio = ({ audioSrc }) => {
             false
         );
         audioElem.current.addEventListener("timeupdate", () => {
-            const duration = (audioElem.current && audioElem.current.duration) || 0;
+            const duration =
+                (audioElem.current && audioElem.current.duration) || 0;
             setCurrentTime(audioElem.current.currentTime);
             setProgress((audioElem.current.currentTime / duration) * 100);
         });
@@ -122,7 +124,7 @@ const Message = ({
                 )}
 
                 <div className="message__avatar">
-                    <img src={avatar} alt="User avatar" />
+                    <Avatar user={user} />
                 </div>
                 <div className="message__info">
                     {(audio || text || isTyping) && (

@@ -1,22 +1,18 @@
 import React from "react";
 import { Message } from "../../components";
-import Dialogs from "../../containers/Dialogs";
 import tr from "../../assets/audio/james.wav";
-import {
-    TeamOutlined,
-    FormOutlined,
-    EllipsisOutlined,
-    SmileOutlined,
-} from "@ant-design/icons";
+import { TeamOutlined, FormOutlined, EllipsisOutlined, SmileOutlined } from "@ant-design/icons";
 import Icon from "@ant-design/icons";
 import { Form, Search, Input, Button, Checkbox } from "antd";
 // import { Input }from "antd}"
 
-import "./Home.scss";
 import Status from "../../components/Status/index";
 import ChatInput from "../../components/ChatInput/index";
 
-import Messages from '../../components/Messages/index';
+import Messages from '../../containers/Messages';
+import Dialogs from "../../containers/Dialogs";
+
+import "./Home.scss";
 
 const Home = () => {
     return (
@@ -57,7 +53,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="chat__dialog-messages">
-                        <Messages items={null} />
+                        <Messages />
                     </div>
                     <div className="chat__dialog-input">
                         <ChatInput />
