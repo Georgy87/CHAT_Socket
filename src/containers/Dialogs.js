@@ -13,8 +13,7 @@ const Dialogs = ({ fetchDialogs, items, userId, setCurrentDialogId }) => {
                 (dialog) =>
                     dialog.user.fullname
                         .toLowerCase()
-                        .indexOf(value.toLowerCase()) >= 0
-            )
+                        .indexOf(value.toLowerCase()) >= 0)
         );
         setValue(value);
     };

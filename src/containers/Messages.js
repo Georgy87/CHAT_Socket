@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { messagesActions } from "../redux/actions";
 import { Messages as BaseMessages } from "../components";
 
-const Dialogs = ({ currentDialogId, fetchMessages, items, isLoading }) => {
+const Messages = ({ currentDialogId, fetchMessages, items, isLoading }) => {
     const messagesRef = useRef(null);
 
     useEffect(() => {
@@ -32,4 +32,4 @@ export default connect(
         isLoading: messages.isLoading,
     }),
     messagesActions
-)(Dialogs);
+)(Messages);

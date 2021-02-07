@@ -5,14 +5,23 @@
 
     &__smile-btn {
         margin-right: 15px;
+
         i.anticon {
             margin-top: 11px;
         }
     }
 
     .ant-btn-circle {
-        cursor: pointer;
-        font-size: 20px;
+        i.anticon {
+            cursor: pointer;
+            font-size: 20px;
+        }
+    }
+
+    &__emoji-picker {
+        position: absolute;
+        bottom: 50px;
+        z-index: 1;
     }
 
     &__actions {
@@ -21,6 +30,18 @@
         width: 80px;
         justify-content: space-between;
         margin-left: 15px;
+
+        &-upload-btn {
+            cursor: pointer;
+            input {
+                cursor: pointer;
+            }
+            &:hover {
+                button {
+                    opacity: 1;
+                }
+            }
+        }
     }
 
     input {
