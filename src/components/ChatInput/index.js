@@ -13,7 +13,7 @@ const ChatInput = (props) => {
     const toggleEmojiPicker = () => {
         setShowEmojiPicker(!emojiPickerVisible);
     };
-
+    
     return (
         <div className="chat-input">
             <div className="chat-input__smile-btn">
