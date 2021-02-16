@@ -21,7 +21,6 @@ export default withFormik({
         store.dispatch(userActions.fetchUserLogin(values));
         setTimeout(() => {
             props.history.push("/");
-            setSubmitting(false);
         }, 50);
     },
     displayName: "LoginForm",

@@ -1,15 +1,10 @@
 import React from "react";
 import { Form, Input } from "antd";
-import Icon, {
-    MailOutlined,
-    UserOutlined,
-    LockOutlined,
-    SmileOutlined,
-} from "@ant-design/icons";
+import Icon from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import validateField from "../../../utils/helpers/validateField";
 
-import { Button, Block } from "../../../components";
+import { Button, Block, FormField } from "../../../components";
 
 const success = false;
 
@@ -33,86 +28,49 @@ const RegisterForm = (props) => {
             <Block name="Пока">
                 {!success ? (
                     <Form onSubmit={handleSubmit} className="login-form">
-                        <Form.Item
-                            validateStatus={validateField(
-                                "email",
-                                touched,
-                                errors
-                            )}
-                            help={!touched.email ? "" : errors.email}
-                            hasFeedback
-                        >
-                            <Input
-                                id="email"
-                                prefix={
-                                    <Icon
-                                        type="mail"
-                                        style={{ color: "rgba(0,0,0,.25)" }}
-                                    />
-                                }
-                                size="large"
-                                placeholder="E-Mail"
-                                value={values.email}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <Input
-                                prefix={
-                                    <Icon
-                                        type="user"
-                                        style={{ color: "rgba(0,0,0,.25)" }}
-                                    />
-                                }
-                                size="large"
-                                placeholder="Ваше имя"
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            validateStatus={validateField(
-                                "password",
-                                touched,
-                                errors
-                            )}
-                            help={!touched.password ? "" : errors.password}
-                            hasFeedback
-                        >
-                            <Input
-                                id="password"
-                                prefix={
-                                    <Icon
-                                        type="lock"
-                                        style={{ color: "rgba(0,0,0,.25)" }}
-                                    />
-                                }
-                                size="large"
-                                type="password"
-                                placeholder="Пароль"
-                                value={values.password}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            validateStatus={validateField(
-                                "password",
-                                touched,
-                                errors
-                            )}
-                        >
-                            <Input
-                                prefix={
-                                    <Icon
-                                        type="lock"
-                                        style={{ color: "rgba(0,0,0,.25)" }}
-                                    />
-                                }
-                                size="large"
-                                type="password2"
-                                placeholder="Повторите пароль"
-                            />
-                        </Form.Item>
+                        <FormField
+                            name="email"
+                            icon="mail"
+                            placeholder="E-Mail"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            values={values}
+                        />
+                        <FormField
+                            name="fullname"
+                            icon="user"
+                            placeholder="Ваше имя и фамилия"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            values={values}
+                        />
+                        <FormField
+                            name="password"
+                            icon="lock"
+                            placeholder="Пароль"
+                            type="password"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            values={values}
+                        />
+
+                        <FormField
+                            name="password_2"
+                            icon="lock"
+                            placeholder="Повторите пароль"
+                            type="password"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            values={values}
+                        />
                         <Form.Item>
                             {isSubmitting && !isValid && <span>Ошибка!</span>}
                             <Button
@@ -128,17 +86,17 @@ const RegisterForm = (props) => {
                         </Link>
                     </Form>
                 ) : (
-                    <div className="auth__success-block">
-                        <div>
-                            <Icon type="info-circle" theme="twoTone" />
-                        </div>
-                        <h2>Подтвердите свой аккаунт</h2>
-                        <p>
-                            На Вашу почту отправлено письмо с ссылкой на
-                            подтверждение аккаунта.
+                        <div className="auth__success-block">
+                            <div>
+                                <Icon type="info-circle" theme="twoTone" />
+                            </div>
+                            <h2>Подтвердите свой аккаунт</h2>
+                            <p>
+                                На Вашу почту отправлено письмо с ссылкой на
+                                подтверждение аккаунта.
                         </p>
-                    </div>
-                )}
+                        </div>
+                    )}
             </Block>
         </div>
     );
