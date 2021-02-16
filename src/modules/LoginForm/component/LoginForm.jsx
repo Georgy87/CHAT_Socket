@@ -72,6 +72,7 @@ const LoginForm = (props) => {
                     <Form.Item>
                         {isSubmitting && !isValid && <span>Ошибка!</span>}
                         <Button
+                            disabled={isSubmitting}
                             onClick={handleSubmit}
                             type="primary"
                             size="large"

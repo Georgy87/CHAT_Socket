@@ -1,4 +1,5 @@
 import userApi from "../../utils/api/user";
+import { openNotification } from "../../utils/helpers";
 const Actions = {
     setUserData: data => ({
         type: "USER:SET_DATA",
@@ -10,14 +11,25 @@ const Actions = {
         });
     },
     fetchUserLogin: postData => dispatch => {
-        console.log(postData);
         return userApi.login(postData).then(({ data }) => {
             const { status, token } = data;
+            if (status === "error") {
+                openNotification({
+                    title: "Ошибка при авторизации",
+                    text: "Неверный логин или пароль",
+                    type: "error"
+                });
+            } else {
+                openNotification({
+                    title: "Отлично!",
+                    text: "Авторизация успешна.",
+                    type: "success"
+                });
+            }
             window.axios.defaults.headers.common["token"] = token;
             window.localStorage["token"] = token;
             dispatch(Actions.fetchUserData());
         })
-
     }
 }
 

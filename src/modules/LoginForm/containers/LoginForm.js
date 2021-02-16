@@ -17,12 +17,12 @@ export default withFormik({
 
         return errors;
     },
-    handleSubmit: (values, { setSubmitting }) => {
+    handleSubmit: (values, { setSubmitting, props }) => {
         store.dispatch(userActions.fetchUserLogin(values));
         setTimeout(() => {
-            // alert(JSON.stringify(values, null, 2));
+            props.history.push("/");
             setSubmitting(false);
-        }, 1000);
+        }, 50);
     },
     displayName: "LoginForm",
 })(LoginForm);
