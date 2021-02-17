@@ -7,7 +7,7 @@ const App = ({isAuth}) => {
     console.log(isAuth);
     return (
         <div className="wrapper">
-            <Route exact path={["/login", "/register"]} component={Auth} />
+            <Route exact path={["/login", "/register", "/signup/verify"]} component={Auth} />
             <Route
                 exact
                 path="/"

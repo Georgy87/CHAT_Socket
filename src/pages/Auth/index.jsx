@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import { LoginForm, RegisterForm } from "../../modules";
+import { CheckEmailInfo } from "./CheckEmailInfo";
 
 import "./Auth.scss";
 
@@ -10,7 +11,7 @@ const Auth = () => (
 		<div className="auth__content">
 			<Route exact path={["/", "/login"]} component={LoginForm} />
 			<Route exact path="/register" component={RegisterForm} />
-			<Route exact path="/signup/verify" component={CheckEmailInfo} />
+			<Route exact path="/signup/verify" render={() => <CheckEmailInfo/>} />
 		</div>
 	</section>
 );
