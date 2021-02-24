@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 const App = ({isAuth}) => {
-    console.log(isAuth);
     return (
         <div className="wrapper">
             <Route exact path={["/login", "/register", "/signup/verify"]} component={Auth} />

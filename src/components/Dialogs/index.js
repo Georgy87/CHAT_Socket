@@ -16,21 +16,23 @@ const Dialogs = ({ items, userId, onSearch, inputValue, onSelectDialog }) => {
                     value={inputValue}
                 />
             </div>
-            {items.length ? (
-                orderBy(items, ["created_at"], ["desc"]).map((item) => (
-                    <DialogItem
-                        key={item._id}
-                        isMe={item.user._id === userId}
-                        {...item}
-                        onSelect={onSelectDialog}
-                    />
-                ))
+            {items ? (
+                orderBy(items, ["created_at"], ["desc"]).map((item) => {
+                    return (
+                        <DialogItem
+                            key={item._id}
+                            isMe={item.author._id === userId}
+                            {...item}
+                            onSelect={onSelectDialog}
+                        />
+                    )
+                })
             ) : (
-                <Empty
-                    image={Empty.PRESENTED_IMAGE_SIMPLE}
-                    description="Ничего не найдено"
-                />
-            )}
+                    <Empty
+                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                        description="Ничего не найдено"
+                    />
+                )}
         </div>
     );
 };

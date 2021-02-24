@@ -11,10 +11,16 @@ import ChatInput from "../../components/ChatInput/index";
 
 import Messages from '../../containers/Messages';
 import Dialogs from "../../containers/Dialogs";
+import { userApi } from "../../utils/api";
 
 import "./Home.scss";
+import Actions from '../../redux/actions/user';
 
 const Home = () => {
+  
+    React.useEffect(() => {
+       Actions.fetchUserData();
+    }, []);
     return (
         <section className="home">
             <div className="chat">
@@ -31,7 +37,7 @@ const Home = () => {
                         />
                     </div>
                     <div className="chat__sidebar-dialogs">
-                        <Dialogs userId={0} items={[]} />
+                        <Dialogs userId={0} />
                     </div>
                 </div>
                 <div className="chat__dialog">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Result, Button, Spin } from 'antd';
+import { useHistory } from "react-router-dom";
 
 import { userApi } from '../../utils/api';
 import Block from '../../components/Block';
@@ -29,9 +30,8 @@ const renderTextInfo = ({ hash, verified }) => {
 };
 
 export const CheckEmailInfo = () => {
-
     const hash = window.location.search.split('hash=')[1];
-    const history = window.history;
+    const history = useHistory();
     const [verified, setVerified] = useState(false);
     const [checking, setChecking] = useState(!!hash);
     const [info, setInfo] = useState(renderTextInfo({ hash, checking, verified }));
@@ -67,7 +67,7 @@ export const CheckEmailInfo = () => {
                         extra={
                             info.status === 'success' &&
                             verified && (
-                                <Button type="primary" onClick={() => history.push('/signin')}>
+                                <Button type="primary" onClick={() => history.push('/login')}>
                                     Войти
                                 </Button>
                             )
