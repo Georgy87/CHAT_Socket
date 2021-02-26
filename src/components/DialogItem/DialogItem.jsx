@@ -19,6 +19,7 @@ const getMessageTime = (created_at) => {
         });
     }
 };
+
 const DialogItem = ({
     _id,
     undread,
@@ -29,7 +30,6 @@ const DialogItem = ({
     onSelect,
     lastMessage
 }) => {
-    console.log(lastMessage.createdAt);
     return (
         <Link to={`/dialog/${_id}`}>
             <div

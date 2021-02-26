@@ -67,7 +67,7 @@ export const CheckEmailInfo = () => {
                         extra={
                             info.status === 'success' &&
                             verified && (
-                                <Button type="primary" onClick={() => history.push('/login')}>
+                                <Button type="primary" onClick={() => history.push('/signin')}>
                                     Войти
                                 </Button>
                             )

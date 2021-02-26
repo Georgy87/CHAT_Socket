@@ -2,14 +2,24 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { messagesActions } from "../redux/actions";
 import { Messages as BaseMessages } from "../components";
+import socket from "../core/socket";
 
-const Messages = ({ currentDialogId, fetchMessages, items, isLoading }) => {
+
+const Messages = ({ currentDialogId, fetchMessages, items, isLoading, addMessage, user }) => {
     const messagesRef = useRef(null);
+
+    const onNewMessage = data => {
+        addMessage(data);
+    };
 
     useEffect(() => {
         if (currentDialogId) {
             fetchMessages(currentDialogId);
         }
+
+        socket.on("SERVER:NEW_MESSAGE", onNewMessage);
+
+        return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
     }, [currentDialogId]);
 
     useEffect(() => {
@@ -18,6 +28,7 @@ const Messages = ({ currentDialogId, fetchMessages, items, isLoading }) => {
 
     return (
         <BaseMessages
+            user={user}
             blockRef={messagesRef}
             items={items}
             isLoading={isLoading}
@@ -26,10 +37,11 @@ const Messages = ({ currentDialogId, fetchMessages, items, isLoading }) => {
 };
 
 export default connect(
-    ({ dialogs, messages }) => ({
+    ({ dialogs, messages, user }) => ({
         currentDialogId: dialogs.currentDialogId,
         items: messages.items,
         isLoading: messages.isLoading,
+        user: user.data
     }),
     messagesActions
 )(Messages);

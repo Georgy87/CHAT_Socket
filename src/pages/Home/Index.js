@@ -7,8 +7,8 @@ import { Form, Search, Input, Button, Checkbox } from "antd";
 // import { Input }from "antd}"
 
 import Status from "../../components/Status/index";
-import ChatInput from "../../components/ChatInput/index";
 
+import ChatInput from "../../containers/ChatInput";
 import Messages from '../../containers/Messages';
 import Dialogs from "../../containers/Dialogs";
 import { userApi } from "../../utils/api";
@@ -17,10 +17,10 @@ import "./Home.scss";
 import Actions from '../../redux/actions/user';
 
 const Home = () => {
-  
-    React.useEffect(() => {
-       Actions.fetchUserData();
-    }, []);
+
+    // React.useEffect(() => {
+    //    Actions.fetchUserData();
+    // }, []);
     return (
         <section className="home">
             <div className="chat">
