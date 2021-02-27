@@ -6,7 +6,7 @@ import Icon from "@ant-design/icons";
 import { Form, Search, Input, Button, Checkbox } from "antd";
 // import { Input }from "antd}"
 
-import Status from "../../components/Status/index";
+import Status from "../../containers/Status";
 
 import ChatInput from "../../containers/ChatInput";
 import Messages from '../../containers/Messages';
