@@ -18,7 +18,7 @@ export default withFormik({
         return errors;
     },
     handleSubmit: (values, { setSubmitting }) => {
-        console.log(values);
+       
         store.dispatch(userActions.fetchUserRegister(values))
         .then(({ status }) => {
           if (status === "success") {
