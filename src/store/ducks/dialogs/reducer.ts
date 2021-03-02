@@ -1,6 +1,6 @@
 
 import produce, { Draft } from "immer";
-import { DialogsStateType } from "./types";
+import { DialogsActionType, DialogsActionTypes, DialogsStateType } from "./types";
 
 const initialState: DialogsStateType = {
     items: [],
@@ -8,12 +8,12 @@ const initialState: DialogsStateType = {
     isLoading: false,
 }
 
-const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: any) => {
+const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: DialogsActionTypes) => {
     switch (action.type) {
-        case "DIALOGS:SET_ITEMS":
+        case DialogsActionType.SET_ITEMS:
             draftState.items = action.payload;
             break;
-        case "DIALOGS:SET_CURRENT_DIALOG_ID":
+        case  DialogsActionType.SET_CURRENT_DIALOG_ID:
             draftState.currentDialogId = action.payload;
             break;
         default:

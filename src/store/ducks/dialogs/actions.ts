@@ -1,6 +1,5 @@
 import { DialogsActionType, DialogsInfoType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
 
-
 export const setDialogs = (payload: DialogsInfoType[]): SetDialogsType => {
     return {
         type: DialogsActionType.SET_ITEMS,
