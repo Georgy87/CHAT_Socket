@@ -7,6 +7,7 @@ import { openNotification } from "../../../utils/helpers";
 
 export function* fetchUserDataRequest() {
     try {
+        //@ts-ignore
         const data = yield call(userApi.getMe);
         yield put(setUserData(data));
     } catch (err) {
@@ -19,6 +20,7 @@ export function* fetchUserDataRequest() {
 
 export function* fetchUserRegistrationRequest({ payload }: FetchUserRegistrationType) {
     try {
+        //@ts-ignore
         const data = yield call(userApi.signUp, payload);
         yield put(setUserData(data));
     } catch (err) {
@@ -35,7 +37,7 @@ export function* fetchUserLoginRequest({ payload }: FetchUserLoginType) {
             type: 'success',
         });
         //@ts-ignore
-        window.axios.defaults.headers.common["token"]= token;
+        window.axios.defaults.headers.common["token"] = token;
         window.localStorage["token"] = token;
         yield put(setUserData(data));
         yield put(setIsAuth(true));

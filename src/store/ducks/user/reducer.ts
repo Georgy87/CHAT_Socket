@@ -1,5 +1,5 @@
 import produce, { Draft } from "immer";
-import { UserStateType } from "./types";
+import { UserActionType, UserActionTypes, UserStateType } from "./types";
 
 const initialState: UserStateType = {
     data: null,
@@ -7,14 +7,14 @@ const initialState: UserStateType = {
     isAuth: false
 };
 
-const userReducer = produce((draftState: Draft<UserStateType>, action: any) => {
+const userReducer = produce((draftState: Draft<UserStateType>, action: UserActionTypes) => {
     switch (action.type) {
-        case "USER:SET_DATA":
+        case UserActionType.SET_USER_DATA:
             draftState.data = action.payload;
             draftState.isAuth = true;
             draftState.token = window.localStorage.token;
             break;
-        case "USER:SET_IS_AUTH":
+        case UserActionType.SET_IS_AUTH:
             draftState.isAuth = action.payload;
             break;
         default:
