@@ -1,8 +1,9 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 
 import { userApi } from "../../../utils/api";
-import { UserActionType } from "./types";
+import { UserActionType, FetchUserLoginType, FetchUserRegistrationType } from "./types";
 import { setIsAuth, setUserData } from './actions';
+import { openNotification } from "../../../utils/helpers";
 
 export function* fetchUserDataRequest() {
     try {
@@ -16,17 +17,42 @@ export function* fetchUserDataRequest() {
     }
 }
 
-export function* fetchUserLoginRequest() {
+export function* fetchUserRegistrationRequest({ payload }: FetchUserRegistrationType) {
     try {
-
+        const data = yield call(userApi.signUp, payload);
+        yield put(setUserData(data));
     } catch (err) {
-        
+        yield console.log(err);
     }
 }
 
-
+export function* fetchUserLoginRequest({ payload }: FetchUserLoginType) {
+    try {
+        const { data, token } = yield call(userApi.signIn, payload);
+        openNotification({
+            title: 'Отлично!',
+            text: 'Авторизация успешна.',
+            type: 'success',
+        });
+        //@ts-ignore
+        window.axios.defaults.headers.common["token"]= token;
+        window.localStorage["token"] = token;
+        yield put(setUserData(data));
+        yield put(setIsAuth(true));
+    } catch (err) {
+        if (err) {
+            openNotification({
+                title: "Ошибка при авторизации",
+                text: "Неверный логин или пароль",
+                type: "error"
+            });
+        }
+    }
+}
 
 export function* UserSaga() {
     yield takeLatest(UserActionType.FETCH_USER_DATA, fetchUserDataRequest);
+    yield takeLatest(UserActionType.FETCH_USER_REGISTRATION, fetchUserRegistrationRequest);
+    yield takeLatest(UserActionType.FETCH_USER_LOGIN, fetchUserLoginRequest);
 }
 

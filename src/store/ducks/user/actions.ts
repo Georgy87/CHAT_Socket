@@ -14,3 +14,4 @@ export const setIsAuth = (payload: boolean): SetIsAuthType => {
         payload
     }
 }
+

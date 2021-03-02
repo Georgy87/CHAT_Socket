@@ -32,7 +32,6 @@ const Actions = {
             dispatch(Actions.fetchUserData());
             dispatch(Actions.setIsAuth(true));
             return data;
-
         }).catch(({ response }) => {
             if (response.status === 403) {
                 openNotification({
@@ -44,7 +43,6 @@ const Actions = {
         });
     },
     fetchUserRegister: postData => dispatch => {
-        console.log(postData);
         return userApi.signUp(postData).then(({ data }) => {
             return data;
         });
