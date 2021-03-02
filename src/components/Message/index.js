@@ -10,6 +10,11 @@ import playSvg from "../../assets/img/play.svg";
 import pauseSvg from "../../assets/img/pause.svg";
 import { convertCurrentTime } from "../../utils/helpers";
 import Avatar from '../Avatar/index';
+// import { Popover, Button } from "antd";
+import { Popover } from "antd";
+import Icon from '@ant-design/icons';
+import { EllipsisOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 
 import "./Message.scss";
 
@@ -73,8 +78,8 @@ const MessageAudio = ({ audioSrc }) => {
                         {isPlaying ? (
                             <img src={pauseSvg} alt="Pause svg" />
                         ) : (
-                            <img src={playSvg} alt="Play svg" />
-                        )}
+                                <img src={playSvg} alt="Play svg" />
+                            )}
                     </button>
                 </div>
                 <div className="message__audio-wave">
@@ -98,6 +103,7 @@ const Message = ({
     attachments,
     isTyping,
     audio,
+    onRemoveMessage
 }) => {
     return (
         <div
@@ -116,12 +122,29 @@ const Message = ({
                         className="message__icon-readed"
                     />
                 ) : (
-                    <img
-                        src={noReadedSvg}
-                        alt="Checked icon"
-                        className="message__icon-readed message__icon-readed--no"
-                    />
-                )}
+                        <img
+                            src={noReadedSvg}
+                            alt="Checked icon"
+                            className="message__icon-readed message__icon-readed--no"
+                        />
+                    )}
+                <Popover
+                    content={
+                        <div>
+                            <Button onClick={onRemoveMessage}>Удалить сообщение</Button>
+                        </div>
+                    }
+                    trigger="click"
+                >
+                    <div className="message__icon-actions">
+                        <Button
+                            type="link"
+                            shape="circle"
+                            icon={<EllipsisOutlined />}
+                            style={{ fontSize: "20px" }}
+                        />
+                    </div>
+                </Popover>
 
                 <div className="message__avatar">
                     <Avatar user={user} />

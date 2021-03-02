@@ -4,8 +4,7 @@ import { messagesActions } from "../redux/actions";
 import { Messages as BaseMessages } from "../components";
 import socket from "../core/socket";
 
-
-const Messages = ({ currentDialogId, fetchMessages, items, isLoading, addMessage, user }) => {
+const Messages = ({ currentDialogId, fetchMessages, items, isLoading, addMessage, user, removeMessageById}) => {
     const messagesRef = useRef(null);
 
     const onNewMessage = data => {
@@ -28,6 +27,7 @@ const Messages = ({ currentDialogId, fetchMessages, items, isLoading, addMessage
 
     return (
         <BaseMessages
+            onRemoveMessage={removeMessageById}
             user={user}
             blockRef={messagesRef}
             items={items}

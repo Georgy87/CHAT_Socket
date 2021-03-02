@@ -25,34 +25,39 @@ const DialogItem = ({
     undread,
     created_at,
     text,
+    user,
     isMe,
     currentDialogId,
     onSelect,
-    lastMessage
+    partner,
+    author,
+    lastMessage,
+    userId
 }) => {
     return (
         <Link to={`/dialog/${_id}`}>
             <div
                 className={classNames("dialogs__item", {
-                    "dialogs__item--online": lastMessage.user.isOnline,
+                    "dialogs__item--online": partner.isOnline,
                     "dialogs__item--selected": currentDialogId === _id
                 })}
                 onClick={onSelect.bind(this, _id)}
             >
                 <div className="dialogs__item-avatar">
-                    <Avatar user={lastMessage.user} />
+                    <Avatar user={partner} />
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        <b>{lastMessage.user.fullname}</b>
+                        <b>{author._id === userId ? partner.fullname : author.fullname}</b>
                         {/* <span>{getMessageTime("")}</span> */}
                     </div>
+
                     <div className="dialogs__item-info-bottom">
-                        <p>{lastMessage.text}</p>
+                        <p>{lastMessage && lastMessage.text}</p>
                         {isMe && <IconReaded isMe={true} isReaded={false} />}
-                        {lastMessage.undread > 0 && (
+                        {lastMessage && lastMessage.undread > 0 && (
                             <div className="dialogs__item-info-bottom-count">
-                                {lastMessage.undread > 9 ? "+9" : lastMessage.undread}
+                                {lastMessage && lastMessage.undread > 9 ? "+9" : lastMessage.undread}
                             </div>
                         )}
                     </div>

@@ -13,14 +13,11 @@ const ChatInput = ({ currentDialogId, user, dialogs }) => {
 
     if (currentDialogObj.author._id === user._id) {
         partner = currentDialogObj.author;
-        console.log(partner);
     } else {
-        partner = currentDialogObj.author;
-        console.log(partner);
-
+        partner = currentDialogObj.partner;
     }
 
-    return <StatusBase online={partner.isOnline} fullname={partner.fullname} />;
+    return <StatusBase online={partner.isOnline} fullname={user.fullname} partner={partner} />;
 };
 
 export default connect(({ dialogs, user }) => ({

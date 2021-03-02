@@ -21,7 +21,6 @@ const SidebarContainer = ({ user }) => {
     };
 
     const onSearch = value => {
-
         setIsLoading(true);
         userApi
             .findUsers(value)
@@ -55,6 +54,7 @@ const SidebarContainer = ({ user }) => {
     };
 
     const onSelectUser = userId => {
+        console.log(userId);
         setSelectedUserId(userId);
     };
 

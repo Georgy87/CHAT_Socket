@@ -23,6 +23,7 @@ const Dialogs = ({ items, userId, onSearch, inputValue, onSelectDialog }) => {
                             key={item._id}
                             isMe={item.author._id === userId}
                             {...item}
+                            userId={userId}
                             onSelect={onSelectDialog}
                         />
                     )

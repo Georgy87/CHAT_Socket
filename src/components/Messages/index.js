@@ -8,8 +8,7 @@ import Message from '../Message/index';
 
 import "./Messages.scss";
 
-const Messages = ({ blockRef, isLoading, items, user }) => {
-
+const Messages = ({ onRemoveMessage, blockRef, isLoading, items, user }) => {
     return (
         <div
             ref={blockRef}
@@ -17,17 +16,24 @@ const Messages = ({ blockRef, isLoading, items, user }) => {
                 "messages--loading": isLoading,
             })}
         >
-            {isLoading ? (
+            {isLoading && !user ? (
                 <Spin size="large" tip="Загрузка сообщений..." />
             ) : items && !isLoading ? (
                 items.length > 0 ? (
-                    items.map((item) => <Message key={item._id} {...item} isMe={user._id === item.user._id} />)
+                    items.map((item) => {
+                        return <Message
+                            key={item._id}
+                            {...item}
+                            isMe={user._id === item.user._id}
+                            onRemoveMessage={onRemoveMessage.bind(this, item._id)}
+                        />
+                    })
                 ) : (
-                    <Empty description="Диалог пуст" />
-                )
+                        <Empty description="Диалог пуст" />
+                    )
             ) : (
-                <Empty description="Откройте диалог" />
-            )}
+                        <Empty description="Откройте диалог" />
+                    )}
         </div>
     );
 };
