@@ -1,10 +1,5 @@
 import produce, { Draft } from "immer";
-
-export type UserStateType = {
-    data: null;
-    token: any;
-    isAuth: boolean;
-}
+import { UserStateType } from "./types";
 
 const initialState: UserStateType = {
     data: null,
