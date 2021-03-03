@@ -1,21 +1,5 @@
 import produce, { Draft } from "immer";
-import { UserInfo } from "../user/types";
-import { DialogsInfoType } from "../dialogs/types";
-
-export type MessageInfoType = {
-    unread: boolean;
-    _id: string;
-    text: string;
-    dialog: DialogsInfoType<string>;
-    user: UserInfo;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export type MessageStateType = {
-    items: MessageInfoType[] | null;
-    isLoading: boolean;
-}
+import { MessageStateType } from "./types";
 
 const initialState: MessageStateType = {
     items: null,
@@ -25,7 +9,9 @@ const initialState: MessageStateType = {
 const messagesReducer = produce((draftState: Draft<MessageStateType>, action: any) => {
     switch (action.type) {
         case "MESSAGES:ADD_MESSAGE":
-            draftState.items = [...draftState.items, action.payload];
+            if (draftState.items) {
+                draftState.items = [...draftState.items, action.payload];
+            }
             break;
         case "MESSAGES:SET_ITEMS":
             draftState.items = action.payload;
@@ -35,7 +21,9 @@ const messagesReducer = produce((draftState: Draft<MessageStateType>, action: an
             draftState.isLoading = action.payload;
             break;
         case "MESSAGES:REMOVE_MESSAGE":
-            draftState.items = draftState.items.filter(message => message._id !== action.payload);
+            if (draftState.items) {
+                draftState.items = draftState.items.filter(message => message._id !== action.payload);
+            }
             break;
         default:
             break;

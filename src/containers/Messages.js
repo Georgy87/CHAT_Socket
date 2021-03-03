@@ -4,11 +4,13 @@ import { messagesActions } from "../redux/actions";
 import { Messages as BaseMessages } from "../components";
 import socket from "../core/socket";
 
-const Messages = ({ currentDialogId, fetchMessages, items, isLoading, addMessage, user, removeMessageById}) => {
+const Messages = ({ currentDialogId, fetchMessages, items, isLoading, addMessage, user, removeMessageById, dialogs }) => {
     const messagesRef = useRef(null);
 
     const onNewMessage = data => {
-        addMessage(data);
+        if (data.dialog && currentDialogId === data.dialog._id) {
+            addMessage(data);
+        }
     };
 
     useEffect(() => {
@@ -38,6 +40,7 @@ const Messages = ({ currentDialogId, fetchMessages, items, isLoading, addMessage
 
 export default connect(
     ({ dialogs, messages, user }) => ({
+        dialogs,
         currentDialogId: dialogs.currentDialogId,
         items: messages.items,
         isLoading: messages.isLoading,
