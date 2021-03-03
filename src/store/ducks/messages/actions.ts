@@ -1,6 +1,5 @@
 import { AddMessageType, FetchMessagesType, FetchRemoveMessageByIdType, FetchSendMessageType, MessageActionType, MessageInfoType, RemoveMessageByIdType, SetIsLoadingType, SetMessagesType } from "./types"
 
-
 export const setMessages = (items: MessageInfoType[]): SetMessagesType => {
     return {
         type: MessageActionType.SET_ITEMS,
