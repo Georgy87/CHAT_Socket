@@ -32,17 +32,17 @@ export type DialogueParticipantsType = {
     id: string;
 }
 
-export type DialogsInfoType = {
+export type DialogsInfoType<T> = {
     _id: string;
-    author: DialogueParticipantsType;
-    partner: DialogueParticipantsType;
+    author: T;
+    partner: T;
     createdAt: string;
     updatedAt: string;
     lastMessage: LastMessageType;
 }
 
 export type DialogsStateType = {
-    items: DialogsInfoType[];
+    items: DialogsInfoType<DialogueParticipantsType>[];
     currentDialogId: string;
     isLoading: boolean;
 }
@@ -51,7 +51,7 @@ export type DialogsStateType = {
 
 export type SetDialogsType = {
     type: DialogsActionType.SET_ITEMS;
-    payload: DialogsInfoType[];
+    payload: DialogsInfoType<DialogueParticipantsType>[];
 }
 
 export type SetCurrentDialogIdType = {

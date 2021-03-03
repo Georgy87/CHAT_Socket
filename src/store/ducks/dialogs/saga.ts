@@ -17,3 +17,5 @@ export function* fetchUserDataRequest() {
 export function* DialogsSaga() {
     yield takeLatest(DialogsActionType.FETCH_DIALOGS, fetchUserDataRequest);
 }
+
+

@@ -1,6 +1,6 @@
-import { DialogsActionType, DialogsInfoType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
+import { DialogsActionType, DialogsInfoType, DialogueParticipantsType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
 
-export const setDialogs = (payload: DialogsInfoType[]): SetDialogsType => {
+export const setDialogs = (payload: DialogsInfoType<DialogueParticipantsType>[]): SetDialogsType => {
     return {
         type: DialogsActionType.SET_ITEMS,
         payload

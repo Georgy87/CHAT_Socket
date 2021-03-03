@@ -17,7 +17,6 @@ const actions = {
         }
     },
     fetchSendMessage: (text, dialogId) => dispatch => {
-        console.log(text, dialogId);
         messagesApi.send(text, dialogId);
     },
     setIsLoading: (bool) => ({
