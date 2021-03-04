@@ -11,6 +11,7 @@ const Actions = {
     }),
     fetchUserData: () => dispatch => {
         userApi.getMe().then(({ data }) => {
+            console.log(data);
             dispatch(Actions.setUserData(data));
         }).catch(err => {
             if (err.response.status === 403) {
@@ -21,14 +22,14 @@ const Actions = {
     },
     fetchUserLogin: postData => dispatch => {
         return userApi.signIn(postData).then(({ data }) => {
-            const { status, token } = data;
+
             openNotification({
                 title: 'Отлично!',
                 text: 'Авторизация успешна.',
                 type: 'success',
             });
-            window.axios.defaults.headers.common["token"] = token;
-            window.localStorage["token"] = token;
+            window.axios.defaults.headers.common["token"] = data.token;
+            window.localStorage["token"] = data.token;
             dispatch(Actions.fetchUserData());
             dispatch(Actions.setIsAuth(true));
             return data;

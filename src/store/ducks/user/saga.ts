@@ -30,7 +30,8 @@ export function* fetchUserRegistrationRequest({ payload }: FetchUserRegistration
 
 export function* fetchUserLoginRequest({ payload }: FetchUserLoginType) {
     try {
-        const { data, token } = yield call(userApi.signIn, payload);
+        const { data } = yield call(userApi.signIn, payload);
+       
         openNotification({
             title: 'Отлично!',
             text: 'Авторизация успешна.',
@@ -38,7 +39,7 @@ export function* fetchUserLoginRequest({ payload }: FetchUserLoginType) {
         });
         //@ts-ignore
         window.axios.defaults.headers.common["token"] = token;
-        window.localStorage["token"] = token;
+        window.localStorage["token"] = data.token;
         yield put(setUserData(data));
         yield put(setIsAuth(true));
     } catch (err) {

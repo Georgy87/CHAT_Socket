@@ -5,7 +5,8 @@ export enum UserActionType {
     SET_IS_AUTH = "USER:SET_IS_AUTH",
     FETCH_USER_DATA = "USER:FETCH_USER_DATA",
     FETCH_USER_LOGIN = "USER:FETCH_USER_LOGIN",
-    FETCH_USER_REGISTRATION = "USER:FETCH_USER_REGISTRATION"
+    FETCH_USER_REGISTRATION = "USER:FETCH_USER_REGISTRATION",
+    FETCH_VERIFY_HASH = "USER:FETCH_VERIFY_HASH",
 }
 
 // state types
@@ -49,18 +50,23 @@ export type FetchUserDataType = {
 }
 
 export type FetchUserRegistrationType = {
-    type: UserActionType.FETCH_USER_LOGIN,
+    type: UserActionType.FETCH_USER_REGISTRATION,
     payload: { email: string; fullname: string; password: string };
 }
 
 export type FetchUserLoginType = {
-    type: UserActionType.FETCH_USER_REGISTRATION,
+    type: UserActionType.FETCH_USER_LOGIN,
     payload: { email: string; password: string };
 }
 
+export type FetchVerifyHash = {
+    type: UserActionType.FETCH_VERIFY_HASH;
+}
+
 export type UserActionTypes =
-    SetUserDataType |
-    SetIsAuthType |
-    FetchUserDataType |
-    FetchUserRegistrationType |
-    FetchUserLoginType;
+    | SetUserDataType
+    | SetIsAuthType
+    | FetchUserDataType
+    | FetchUserRegistrationType
+    | FetchUserLoginType
+    | FetchVerifyHash;

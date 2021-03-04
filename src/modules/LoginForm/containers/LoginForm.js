@@ -19,15 +19,10 @@ export default withFormik({
         return errors;
     },
     handleSubmit: (values, { setSubmitting, props }) => {
-        // const history = useHistory()
-        // history.push("/");
-
         store
             .dispatch(userActions.fetchUserLogin(values))
-            .then(({ status }) => {
-
-                console.log( props );
-                if (status === "success") {
+            .then((data) => {
+                if (data.status === "success") {
                     props.history.push("/");
                 }
                 setSubmitting(false);
