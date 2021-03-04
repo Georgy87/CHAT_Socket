@@ -18,5 +18,9 @@ export default {
         const { data } = await axios.get("/user/verify?hash=" + hash);
         return data;
     },
-    findUsers: query => axios.get("/user/find?query=" + query)
+    async findUsers(payload: any) {
+        const { data } = await axios.get("/user/find?query=" + payload);
+        return data;
+    }
 };
+

@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 
 import { userApi } from "../../../utils/api";
-import { UserActionType, FetchUserLoginType, FetchUserRegistrationType } from "./types";
+import { UserActionType, FetchUserLoginType, FetchUserRegistrationType, FetchFindUserType } from "./types";
 import { setIsAuth, setUserData } from './actions';
 import { openNotification } from "../../../utils/helpers";
 
@@ -31,7 +31,7 @@ export function* fetchUserRegistrationRequest({ payload }: FetchUserRegistration
 export function* fetchUserLoginRequest({ payload }: FetchUserLoginType) {
     try {
         const { data } = yield call(userApi.signIn, payload);
-       
+
         openNotification({
             title: 'Отлично!',
             text: 'Авторизация успешна.',
@@ -50,6 +50,16 @@ export function* fetchUserLoginRequest({ payload }: FetchUserLoginType) {
                 type: "error"
             });
         }
+    }
+}
+
+export function* fetchFindUserRequest({ payload }: FetchFindUserType) {
+    try {
+        //@ts-ignore
+        const data = yield call(userApi.findUsers, payload);
+        yield put(setUserData(data));
+    } catch (err) {
+        yield console.log(err);
     }
 }
 

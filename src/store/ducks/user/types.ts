@@ -7,6 +7,7 @@ export enum UserActionType {
     FETCH_USER_LOGIN = "USER:FETCH_USER_LOGIN",
     FETCH_USER_REGISTRATION = "USER:FETCH_USER_REGISTRATION",
     FETCH_VERIFY_HASH = "USER:FETCH_VERIFY_HASH",
+    FETCH_FIND_USER = "USER:FETCH_FIND_USER",
 }
 
 // state types
@@ -61,6 +62,11 @@ export type FetchUserLoginType = {
 
 export type FetchVerifyHash = {
     type: UserActionType.FETCH_VERIFY_HASH;
+}
+
+export type FetchFindUserType = {
+    type: UserActionType.FETCH_FIND_USER;
+    payload: string;
 }
 
 export type UserActionTypes =
