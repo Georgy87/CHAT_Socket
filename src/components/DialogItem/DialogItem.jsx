@@ -9,6 +9,8 @@ import { generateAvatarFromHash } from "../../utils/helpers";
 import IconReaded from "../IconReaded/index";
 import Avatar from "../Avatar/index";
 import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import actions from '../../redux/actions/dialogs';
 
 const getMessageTime = (created_at) => {
     if (isToday(new Date(created_at))) {
@@ -34,6 +36,7 @@ const DialogItem = ({
     lastMessage,
     userId
 }) => {
+    const dispatch = useDispatch();
     return (
         <Link to={`/dialog/${_id}`}>
             <div
@@ -41,7 +44,7 @@ const DialogItem = ({
                     "dialogs__item--online": partner.isOnline,
                     "dialogs__item--selected": currentDialogId === _id
                 })}
-                onClick={onSelect.bind(this, _id)}
+                onClick={() => dispatch(actions.setCurrentDialogId(_id))}
             >
                 <div className="dialogs__item-avatar">
                     <Avatar user={partner} />

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { userApi, dialogsApi } from "../utils/api";
 
 import Sidebar from "../components/SideBar";
 
-const SidebarContainer = ({ user }) => {
+const SidebarContainer = () => {
+    const user = useSelector((state) => state.user.data);
+
     const [visible, setVisible] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [messageText, setMessagaText] = useState("");
@@ -77,4 +79,4 @@ const SidebarContainer = ({ user }) => {
     );
 };
 
-export default connect(({ user }) => ({ user: user.data }))(SidebarContainer);
+export default SidebarContainer;

@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { FetchMessagesType, FetchRemoveMessageByIdType, FetchSendMessageType, MessageActionType } from "./types";
 import messagesApi from "../../../utils/api/messages";
+import { setMessages, setIsLoading, removeMessageById } from './actions';
 
 export function* fetchSendMessageRequest({ payload }: FetchSendMessageType) {
     try {
@@ -10,17 +11,21 @@ export function* fetchSendMessageRequest({ payload }: FetchSendMessageType) {
     }
 }
 
-export function* fetchRemoveMessageByIdType({ payload }: FetchRemoveMessageByIdType) {
+export function* fetchRemoveMessageByIdRequest({ payload }: FetchRemoveMessageByIdType) {
     try {
-        yield call(messagesApi.removeById, payload);
+        const { data } = yield call(messagesApi.removeById, payload);
+        yield put(removeMessageById(data));
     } catch (error) {
         yield console.log(error);
     }
 }
 
-export function* fetchMessages({ payload }: FetchMessagesType) {
+export function* fetchMessagesRequest({ payload }: FetchMessagesType) {
     try {
-        yield call(messagesApi.getAllByDialogId, payload);
+        yield setIsLoading(true);
+        const { data } = yield call(messagesApi.getAllByDialogId, payload);
+        yield put(setMessages(data));
+        yield setIsLoading(false);
     } catch (error) {
         yield console.log(error);
     }
@@ -28,6 +33,6 @@ export function* fetchMessages({ payload }: FetchMessagesType) {
 
 export function* MessagesSaga() {
     yield takeLatest(MessageActionType.FETCH_SEND_MESSAGE, fetchSendMessageRequest);
-    yield takeLatest(MessageActionType.FETCH_REMOVE_MESSAGE_BY_ID, fetchRemoveMessageByIdType);
-    yield takeLatest(MessageActionType.FETCH_MESSAGES, fetchMessages);
+    yield takeLatest(MessageActionType.FETCH_REMOVE_MESSAGE_BY_ID, fetchRemoveMessageByIdRequest);
+    yield takeLatest(MessageActionType.FETCH_MESSAGES, fetchMessagesRequest);
 }

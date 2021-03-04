@@ -6,7 +6,6 @@ const actions = {
         payload: items,
     }),
     addMessage: (message) => {
-        console.log(message);
         return {
             type: "MESSAGES:ADD_MESSAGE",
             payload: message
