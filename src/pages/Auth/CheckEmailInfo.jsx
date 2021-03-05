@@ -3,7 +3,7 @@ import { Result, Button, Spin } from 'antd';
 import { useHistory } from "react-router-dom";
 
 import { userApi } from '../../utils/api';
-import Block from '../../components/Block';
+import Block from '../../components/Block/Block';
 
 const renderTextInfo = ({ hash, verified }) => {
     if (hash) {

@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import userReducer from './ducks/user/reducer';
-import dialogsReducer from './ducks/dialogs/reducer';
-import messagesReducer from './ducks/messages/reducer';
+import user from './ducks/user/reducer';
+import dialogs from './ducks/dialogs/reducer';
+import messages from './ducks/messages/reducer';
+import Messages from '../components/Messages/Messages';
 
 export const rootReducers = combineReducers({
-    userReducer,
-    dialogsReducer,
-    messagesReducer
+    dialogs,
+    messages,
+    user,
 });

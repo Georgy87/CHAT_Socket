@@ -14,7 +14,7 @@ export const setCurrentDialogId = (payload: string): SetCurrentDialogIdType => {
     }
 }
 
-export const fetchDialogsType  = (): FetchDialogsType => {
+export const fetchDialogs  = (): FetchDialogsType => {
     return {
         type: DialogsActionType.FETCH_DIALOGS,
     }

@@ -1,9 +1,11 @@
 import { withFormik } from "formik";
 import LoginForm from "../component/LoginForm";
 import validateForm from "../../../utils/validate";
-import store from "../../../redux/store";
+
 import { userActions } from "../../../redux/actions";
 import { useHistory } from 'react-router-dom';
+import { fetchUserLogin } from "../../../store/ducks/user/actions";
+import { store } from "../../../store/store";
 
 export default withFormik({
     enableReinitialize: true,
@@ -20,9 +22,11 @@ export default withFormik({
     },
     handleSubmit: (values, { setSubmitting, props }) => {
         store
-            .dispatch(userActions.fetchUserLogin(values))
+            .dispatch(fetchUserLogin(values))
             .then((data) => {
+                console.log('HELLO')
                 if (data.status === "success") {
+
                     props.history.push("/");
                 }
                 setSubmitting(false);

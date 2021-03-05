@@ -9,7 +9,7 @@ import waveSvg from "../../assets/img/wave.svg";
 import playSvg from "../../assets/img/play.svg";
 import pauseSvg from "../../assets/img/pause.svg";
 import { convertCurrentTime } from "../../utils/helpers";
-import Avatar from '../Avatar/index';
+import Avatar from '../Avatar/Avatar';
 // import { Popover, Button } from "antd";
 import { Popover } from "antd";
 import Icon from '@ant-design/icons';

@@ -3,12 +3,13 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import { userActions } from "./redux/actions";
+import { store } from "./store/store";
+import { fetchUserData } from "./store/ducks/user/actions";
 
 import "./styles/index.scss";
 
-store.dispatch(userActions.fetchUserData());
+store.dispatch(fetchUserData());
+
 ReactDOM.render(
     <Provider store={store}>
         <Router>
@@ -17,3 +18,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
+

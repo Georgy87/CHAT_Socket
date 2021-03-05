@@ -1,13 +1,13 @@
 import React from "react";
 import classNames from "classnames";
 import readedSvg from "../../assets/img/readed.svg";
-import Time from "../Time/index";
+import Time from "../Time/Time";
 import isToday from "date-fns/isToday";
 import format from "date-fns/format";
 import ruLocale from "date-fns/locale/ru";
 import { generateAvatarFromHash } from "../../utils/helpers";
 import IconReaded from "../IconReaded/index";
-import Avatar from "../Avatar/index";
+import Avatar from "../Avatar/Avatar";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import actions from '../../redux/actions/dialogs';

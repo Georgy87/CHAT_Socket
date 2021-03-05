@@ -8,6 +8,7 @@ export function* fetchUserDataRequest() {
     try {
         //@ts-ignore
         const data = yield call(dialogsApi.getAll)
+        console.log(data);
         yield put(setDialogs(data));
     } catch (err) {
         console.log(err);

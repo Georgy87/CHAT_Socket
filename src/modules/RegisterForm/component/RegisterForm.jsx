@@ -2,9 +2,10 @@ import React from "react";
 import { Form, Input } from "antd";
 import Icon from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import validateField from "../../../utils/helpers/validateField";
 
-import { Button, Block, FormField } from "../../../components";
+import validateField from "../../../utils/helpers/validateField";
+import { Button, FormField } from "../../../components";
+import Block from '../../../components/Block/Block';
 
 const success = false;
 

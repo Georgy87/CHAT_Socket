@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import Icon, { SmileOutlined } from "@ant-design/icons";
 import { Form, Input } from "antd";
 import { Link } from "react-router-dom";
-import { Button, Block } from "../../../components";
+
+import { Button } from "../../../components";
+import Block from '../../../components/Block/Block';
 import validateField from "../../../utils/helpers/validateField";
+
 
 const LoginForm = (props) => {
     const {

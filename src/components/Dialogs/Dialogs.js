@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import DialogItem from "../DialogItem/DialogItem";
 import socket from '../../core/socket';
 import actions from '../../redux/actions/dialogs';
+import { fetchDialogs } from '../../store/ducks/dialogs/actions';
 
 import "./Dialogs.scss";
 
@@ -33,7 +34,7 @@ const Dialogs = ({ userId }) => {
     };
 
     const onNewDialog = () => {
-        dispatch(actions.fetchDialogs());
+        dispatch(fetchDialogs());
     };
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const Dialogs = ({ userId }) => {
     }, [dialogs]);
 
     useEffect(() => {
-        dispatch(actions.fetchDialogs());
+        dispatch(fetchDialogs());
 
         socket.on("SERVER:DIALOG_CREATED", onNewDialog);
         return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
