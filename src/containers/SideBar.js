@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { userApi, dialogsApi } from "../utils/api";
 
-import Sidebar from "../components/SideBar";
+import Sidebar from "../components/SideBar/SideBar";
 
 const SidebarContainer = () => {
     const user = useSelector((state) => state.user.data);

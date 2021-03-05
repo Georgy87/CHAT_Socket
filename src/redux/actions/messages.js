@@ -26,10 +26,12 @@ const actions = {
                     type: "MESSAGES:REMOVE_MESSAGE",
                     payload: id
                 });
+                dispatch(actions.setIsLoading(false));
             })
             .catch(() => {
                 dispatch(actions.setIsLoading(false));
             });
+
     },
     fetchMessages: (dialogId) => (dispatch) => {
         dispatch(actions.setIsLoading(true));

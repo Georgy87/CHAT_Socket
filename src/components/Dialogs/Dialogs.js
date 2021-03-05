@@ -13,7 +13,7 @@ import "./Dialogs.scss";
 
 const Dialogs = ({ userId }) => {
     const dialogs = useSelector((state) => state.dialogs.items);
-    
+
     const dispatch = useDispatch();
 
     const [inputValue, setValue] = useState("");
@@ -57,7 +57,7 @@ const Dialogs = ({ userId }) => {
                     value={inputValue}
                 />
             </div>
-            {dialogs.length ? (
+            {dialogs ? (
                 orderBy(filtred, ["created_at"], ["desc"]).map((item) => {
                     return (
                         <DialogItem

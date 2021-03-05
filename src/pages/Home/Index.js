@@ -1,15 +1,13 @@
 import React from "react";
-
 import { EllipsisOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 
 import Status from "../../containers/Status";
 import ChatInput from "../../containers/ChatInput";
-import Messages from '../../containers/Messages';
+import Messages from '../../components/Messages/Messages';
 import Sidebar from '../../containers/SideBar';
 
 import "./Home.scss";
-import { useHistory } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -21,7 +19,7 @@ const Home = () => {
                         <div />
                         <div className="chat__dialog-header-center">
                             <b className="chat__dialog-header-username">
-                                
+
                             </b>
                             <div className="chat__dialog-header-status">
                                 <Status online />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, Select, Input, Form } from 'antd';
 import Icon from "@ant-design/icons";
-import Dialogs from '../Dialogs';
+import Dialogs from '../Dialogs/Dialogs';
 
 import './SideBar.scss';
 
