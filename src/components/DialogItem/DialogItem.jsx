@@ -27,10 +27,8 @@ const DialogItem = ({
     undread,
     created_at,
     text,
-    user,
     isMe,
     currentDialogId,
-    onSelect,
     partner,
     author,
     lastMessage,
@@ -41,13 +39,13 @@ const DialogItem = ({
         <Link to={`/dialog/${_id}`}>
             <div
                 className={classNames("dialogs__item", {
-                    "dialogs__item--online": partner.isOnline,
+                    "dialogs__item--online": author._id === userId ? partner.isOnline : author.isOnline,
                     "dialogs__item--selected": currentDialogId === _id
                 })}
                 onClick={() => dispatch(actions.setCurrentDialogId(_id))}
             >
                 <div className="dialogs__item-avatar">
-                    <Avatar user={partner} />
+                    <Avatar user={author._id === userId ? partner : author} />
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
