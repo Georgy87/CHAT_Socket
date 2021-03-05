@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Button, Input } from "antd";
 import { UploadField } from "@navjobs/upload";
 import { Picker } from "emoji-mart";
-import 'emoji-mart/css/emoji-mart.css'
+import 'emoji-mart/css/emoji-mart.css';
+import actions from '../../redux/actions/messages';
+
 import "./ChatInput.scss";
 
-const ChatInput = (props) => {
-  
+const ChatInput = () => {
+    const dispatch = useDispatch();
+
     const [value, setValue] = useState("");
     const [emojiPickerVisible, setShowEmojiPicker] = useState(false);
-    const { onSendMessage, currentDialogId } = props;
+    const currentDialogId = useSelector(state => state.dialogs.currentDialogId);
 
     const toggleEmojiPicker = () => {
         setShowEmojiPicker(!emojiPickerVisible);
@@ -18,7 +22,7 @@ const ChatInput = (props) => {
 
     const handleSendMessage = e => {
         if (e.keyCode === 13) {
-            onSendMessage(value, currentDialogId);
+            dispatch(actions.fetchSendMessage(value, currentDialogId));
             setValue("");
         }
     };

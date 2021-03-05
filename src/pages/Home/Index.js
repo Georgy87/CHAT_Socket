@@ -1,9 +1,7 @@
 import React from "react";
-import { EllipsisOutlined } from "@ant-design/icons";
-import { Button } from "antd";
 
 import Status from "../../components/Status/Status";
-import ChatInput from "../../containers/ChatInput";
+import ChatInput from "../../components/ChatInput/ChatInput";
 import Messages from '../../components/Messages/Messages';
 import Sidebar from '../../containers/SideBar';
 
@@ -17,12 +15,6 @@ const Home = () => {
                 <div className="chat__dialog">
                     <Status />
                     <Messages />
-                    {/* <Button
-                        type="link"
-                        shape="circle"
-                        icon={<EllipsisOutlined />}
-                        style={{ fontSize: "20px" }}
-                    /> */}
                     <div className="chat__dialog-input">
                         <ChatInput />
                     </div>
