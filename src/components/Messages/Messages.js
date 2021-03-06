@@ -6,10 +6,12 @@ import classNames from "classnames";
 
 import Message from '../Message/Message';
 import socket from "../../core/socket";
+import { fetchMessages } from '../../store/ducks/messages/actions';
 
 import actions from '../../redux/actions/messages';
 
 import "./Messages.scss";
+
 
 const Messages = () => {
     const dialogs = useSelector(state => state.dialogs);
@@ -30,7 +32,7 @@ const Messages = () => {
 
     useEffect(() => {
         if (currentDialogId) {
-            dispatch(actions.fetchMessages(currentDialogId));
+            dispatch(fetchMessages(currentDialogId));
         }
 
         socket.on("SERVER:NEW_MESSAGE", onNewMessage);

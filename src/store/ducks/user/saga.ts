@@ -9,7 +9,8 @@ export function* fetchUserDataRequest() {
     try {
         //@ts-ignore
         const data = yield call(userApi.getMe);
-        yield put(setUserData(data));
+        console.log(data.data)
+        yield put(setUserData(data.data));
     } catch (err) {
         if (err.response.status === 403) {
             yield put(setIsAuth(false));

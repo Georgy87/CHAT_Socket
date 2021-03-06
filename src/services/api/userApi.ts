@@ -1,7 +1,7 @@
 import { FetchUserLoginType, FetchUserRegistrationType, UserInfo } from "../../store/ducks/user/types";
 import { axios } from "../../core";
 
-export default {
+export const userApi = {
     async getMe() {
         const { data } = await axios.get<UserInfo>("/user/me");
         return data;
