@@ -5,7 +5,8 @@ const initialState: UserStateType = {
     data: null,
     token: window.localStorage.token,
     isAuth: false,
-    verify: false
+    verify: false,
+    findUser: []
 };
 
 const userReducer = produce((draftState: Draft<UserStateType>, action: UserActionTypes) => {
@@ -20,6 +21,9 @@ const userReducer = produce((draftState: Draft<UserStateType>, action: UserActio
             break;
         case UserActionType.SET_VERIFY:
             draftState.verify = action.payload;
+            break;
+        case UserActionType.SET_FIND_USER:
+            draftState.findUser = action.payload;
             break;
         default:
             break;

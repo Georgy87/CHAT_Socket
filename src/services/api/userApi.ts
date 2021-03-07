@@ -59,7 +59,7 @@ export const userApi = {
         const data = await axios.get("/user/verify?hash=" + hash);
         console.log(data);
     },
-    async findUsers(payload: any) {
+    async findUsers(payload: string) {
         const { data } = await axios.get("/user/find?query=" + payload);
         return data;
     }

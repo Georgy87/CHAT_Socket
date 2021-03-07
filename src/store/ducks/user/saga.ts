@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 
 import { SignInApiType, userApi } from "../../../services/api/userApi";
 import { UserActionType, FetchUserLoginType, FetchUserRegistrationType, FetchFindUserType, FetchVerifyHash } from "./types";
-import { setIsAuth, setUserData, setVerifyHash } from './actions';
+import { setFindUser, setIsAuth, setUserData, setVerifyHash } from './actions';
 import { openNotification } from "../../../utils/helpers";
 import { UserInfo } from "../user/types";
 
@@ -53,9 +53,8 @@ export function* fetchVerifyUserRequest({ payload }: FetchVerifyHash) {
 
 export function* fetchFindUserRequest({ payload }: FetchFindUserType) {
     try {
-        //@ts-ignore
-        const data = yield call(userApi.findUsers, payload);
-        yield put(setUserData(data));
+        const data: UserInfo[] = yield call(userApi.findUsers, payload);
+        yield put(setFindUser(data));
     } catch (err) {
         yield console.log(err);
     }

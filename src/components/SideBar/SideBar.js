@@ -3,28 +3,58 @@ import { Button, Modal, Select, Input, Form } from 'antd';
 import Icon from "@ant-design/icons";
 import Dialogs from '../Dialogs/Dialogs';
 
+
 import './SideBar.scss';
+import { useState } from 'react';
+import { userApi } from '../../utils/api';
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 const Sidebar = ({
-    user,
-    visible,
-    inputValue,
-    messageText,
     selectedUserId,
-    isLoading,
-    users,
-    onShow,
-    onClose,
-    onSearch,
-    onChangeInput,
     onSelectUser,
-    onChangeTextArea,
     onModalOk,
 }) => {
+    const user = useSelector((state) => state.user.data);
+    
+    const [users, setUsers] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+    const [messageText, setMessagaText] = useState("");
+
     const options = users.map(user => <Option key={user._id}>{user.fullname}</Option>);
+
+    const onClose = () => {
+        setVisible(false);
+    };
+
+    const onShow = () => {
+        setVisible(true);
+    };
+
+    const handleChangeInput = value => {
+        setInputValue(value);
+    };
+
+    const onChangeTextArea = e => {
+        setMessagaText(e.target.value);
+    };
+
+    const onSearch = value => {
+        setIsLoading(true);
+        userApi
+            .findUsers(value)
+            .then(({ data }) => {
+                console.log(data);
+                setUsers(data);
+                setIsLoading(false);
+            })
+            .catch(() => {
+                setIsLoading(false);
+            });
+    };
 
     return (
         <div className="chat__sidebar">
@@ -51,7 +81,7 @@ const Sidebar = ({
                         disabled={!messageText}
                         key="submit"
                         type="primary"
-                        loading={isLoading}
+                        // loading={isLoading}
                         onClick={onModalOk}>
                         Создать
                     </Button>,
@@ -61,7 +91,7 @@ const Sidebar = ({
                         <Select
                             value={inputValue}
                             onSearch={onSearch}
-                            onChange={onChangeInput}
+                            onChange={handleChangeInput}
                             onSelect={onSelectUser}
                             notFoundContent={null}
                             style={{ width: '100%' }}

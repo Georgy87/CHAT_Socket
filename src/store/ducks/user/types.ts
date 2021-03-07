@@ -8,6 +8,7 @@ export enum UserActionType {
     FETCH_USER_REGISTRATION = "USER:FETCH_USER_REGISTRATION",
     FETCH_VERIFY_HASH = "USER:FETCH_VERIFY_HASH",
     FETCH_FIND_USER = "USER:FETCH_FIND_USER",
+    SET_FIND_USER = "USER:SET_FIND_USER",
     SET_VERIFY = "USER:SET_VERIFY"
 }
 
@@ -32,6 +33,7 @@ export type UserStateType = {
     token: any;
     isAuth: boolean;
     verify: boolean;
+    findUser: UserInfo[] | [];
 }
 
 // actions types
@@ -49,6 +51,11 @@ export type SetIsAuthType = {
 export type SetVerifyType = {
     type: UserActionType.SET_VERIFY;
     payload: boolean;
+}
+
+export type SetFindUserType = {
+    type: UserActionType.SET_FIND_USER;
+    payload: UserInfo[];
 }
 
 // fetch types
@@ -85,4 +92,5 @@ export type UserActionTypes =
     | FetchUserLoginType
     | FetchVerifyHash
     | FetchFindUserType
-    | SetVerifyType;
+    | SetVerifyType
+    | SetFindUserType;

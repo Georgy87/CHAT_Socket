@@ -3,7 +3,6 @@ import { Result, Button, Spin } from 'antd';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userApi } from '../../utils/api';
 import Block from '../../components/Block/Block';
 import { fetchVerifyHash } from '../../store/ducks/user/actions';
 
@@ -54,12 +53,6 @@ export const CheckEmailInfo = () => {
     useEffect(() => {
         if (hash) {
             dispatch(fetchVerifyHash(hash));
-            // .then(() => {
-            //     setStatus({ verified: true, checking: false });
-            // })
-            // .catch(() => {
-            //     setStatus({ verified: false, checking: false });
-            // });
         }
     }, []);
 
@@ -67,7 +60,6 @@ export const CheckEmailInfo = () => {
         setStatus({ verified: verify, checking: false });
     }, [verify]);
 
-    // console.log({ info, checking, verified, hash });
     return (
         <div className="verify-block">
             <Block>

@@ -1,4 +1,4 @@
-import { FetchFindUserType, FetchUserDataType, FetchUserLoginType, FetchUserRegistrationType, FetchVerifyHash, SetIsAuthType, SetVerifyType, UserActionType, UserInfo } from "./types";
+import { FetchFindUserType, FetchUserDataType, FetchUserLoginType, FetchUserRegistrationType, FetchVerifyHash, SetFindUserType, SetIsAuthType, SetVerifyType, UserActionType, UserInfo } from "./types";
 import { SetUserDataType } from "./types";
 
 export const setUserData = (data: UserInfo): SetUserDataType => {
@@ -11,6 +11,13 @@ export const setUserData = (data: UserInfo): SetUserDataType => {
 export const setIsAuth = (payload: boolean): SetIsAuthType => {
     return {
         type: UserActionType.SET_IS_AUTH,
+        payload
+    }
+}
+
+export const setFindUser = (payload: UserInfo[]): SetFindUserType => {
+    return {
+        type:  UserActionType.SET_FIND_USER,
         payload
     }
 }
