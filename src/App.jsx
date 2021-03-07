@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { Auth, Home } from "./pages";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, Redirect, Switch, useHistory } from "react-router-dom";
 
 const App = () => {
     const isAuth = useSelector(state => state.user.isAuth);
     const history = useHistory();
 
-    // useEffect(() => {
-    //     if (isAuth) {
-    //         history.push('/');
-    //     }
-    // }, [isAuth]);
+    useEffect(() => {
+        if (isAuth) {
+            history.push('/');
+        }
+    }, [isAuth]);
 
     return (
         <div className="wrapper">

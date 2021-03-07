@@ -7,7 +7,6 @@ import { Button } from "../../../components";
 import Block from '../../../components/Block/Block';
 import validateField from "../../../utils/helpers/validateField";
 
-
 const LoginForm = (props) => {
     const {
         values,
@@ -75,7 +74,7 @@ const LoginForm = (props) => {
                     <Form.Item>
                         {isSubmitting && !isValid && <span>Ошибка!</span>}
                         <Button
-                            disabled={isSubmitting}
+                            // disabled={isSubmitting}
                             onClick={handleSubmit}
                             type="primary"
                             size="large"

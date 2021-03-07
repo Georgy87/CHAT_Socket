@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Result, Button, Spin } from 'antd';
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 import { userApi } from '../../utils/api';
 import Block from '../../components/Block/Block';
+import { fetchVerifyHash } from '../../store/ducks/user/actions';
 
 const renderTextInfo = ({ hash, verified }) => {
     if (hash) {
+        console.log(verified)
         if (verified) {
             return {
                 status: 'success',
@@ -31,7 +34,13 @@ const renderTextInfo = ({ hash, verified }) => {
 
 export const CheckEmailInfo = () => {
     const hash = window.location.search.split('hash=')[1];
+
+    const dispatch = useDispatch();
+
+    const verify = useSelector(state => state.user.verify);
+
     const history = useHistory();
+
     const [verified, setVerified] = useState(false);
     const [checking, setChecking] = useState(!!hash);
     const [info, setInfo] = useState(renderTextInfo({ hash, checking, verified }));
@@ -44,16 +53,19 @@ export const CheckEmailInfo = () => {
 
     useEffect(() => {
         if (hash) {
-            userApi
-                .verifyHash(hash)
-                .then(() => {
-                    setStatus({ verified: true, checking: false });
-                })
-                .catch(() => {
-                    setStatus({ verified: false, checking: false });
-                });
+            dispatch(fetchVerifyHash(hash));
+            // .then(() => {
+            //     setStatus({ verified: true, checking: false });
+            // })
+            // .catch(() => {
+            //     setStatus({ verified: false, checking: false });
+            // });
         }
     }, []);
+
+    useEffect(() => {
+        setStatus({ verified: verify, checking: false });
+    }, [verify]);
 
     // console.log({ info, checking, verified, hash });
     return (
@@ -74,10 +86,10 @@ export const CheckEmailInfo = () => {
                         }
                     />
                 ) : (
-                        <div className="verify-block__loading">
-                            <Spin size="large" />
-                        </div>
-                    )}
+                    <div className="verify-block__loading">
+                        <Spin size="large" />
+                    </div>
+                )}
             </Block>
         </div>
     );

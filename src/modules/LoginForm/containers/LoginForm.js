@@ -22,18 +22,18 @@ export default withFormik({
     },
     handleSubmit: (values, { setSubmitting, props }) => {
         store
-            .dispatch(fetchUserLogin(values))
-            .then((data) => {
-                console.log('HELLO')
-                if (data.status === "success") {
+            .dispatch(fetchUserLogin(values));
+            // .then((data) => {
+            //     console.log('HELLO')
+            //     if (data.status === "success") {
 
-                    props.history.push("/");
-                }
-                setSubmitting(false);
-            })
-            .catch(() => {
-                setSubmitting(false);
-            });
+            //         props.history.push("/");
+            //     }
+            //     setSubmitting(false);
+            // })
+            // .catch(() => {
+            //     setSubmitting(false);
+            // });
     },
     displayName: "LoginForm"
 })(LoginForm);

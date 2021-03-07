@@ -4,7 +4,8 @@ import { UserActionType, UserActionTypes, UserStateType } from "./types";
 const initialState: UserStateType = {
     data: null,
     token: window.localStorage.token,
-    isAuth: false
+    isAuth: false,
+    verify: false
 };
 
 const userReducer = produce((draftState: Draft<UserStateType>, action: UserActionTypes) => {
@@ -16,6 +17,9 @@ const userReducer = produce((draftState: Draft<UserStateType>, action: UserActio
             break;
         case UserActionType.SET_IS_AUTH:
             draftState.isAuth = action.payload;
+            break;
+        case UserActionType.SET_VERIFY:
+            draftState.verify = action.payload;
             break;
         default:
             break;

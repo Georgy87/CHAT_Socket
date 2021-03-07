@@ -11,7 +11,6 @@ const Actions = {
     }),
     fetchUserData: () => dispatch => {
         userApi.getMe().then(({ data }) => {
-            console.log(data);
             dispatch(Actions.setUserData(data));
         }).catch(err => {
             if (err.response.status === 403) {
