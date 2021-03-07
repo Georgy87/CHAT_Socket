@@ -3,7 +3,8 @@ import { UserInfo } from "../user/types";
 export enum DialogsActionType {
     SET_ITEMS = "DIALOGS:SET_ITEMS",
     SET_CURRENT_DIALOG_ID = "DIALOGS:SET_CURRENT_DIALOG_ID",
-    FETCH_DIALOGS = "DIALOGS:FETCH_DIALOGS"
+    FETCH_DIALOGS = "DIALOGS:FETCH_DIALOGS",
+    FETCH_CREATE_DIALOG = "DIALOGS:FETCH_CREATE_DIALOG"
 }
 
 // state types
@@ -64,6 +65,12 @@ export type SetCurrentDialogIdType = {
 export type FetchDialogsType = {
     type: DialogsActionType.FETCH_DIALOGS;
 }
+
+export type FetchCreateDialogType = {
+    type: DialogsActionType.FETCH_CREATE_DIALOG;
+    payload: { partner: string; text: string };
+}
+
 
 export type DialogsActionTypes = SetDialogsType | SetCurrentDialogIdType | FetchDialogsType;
 

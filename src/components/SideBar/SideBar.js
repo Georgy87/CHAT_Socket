@@ -6,14 +6,14 @@ import Icon from "@ant-design/icons";
 
 import Dialogs from '../Dialogs/Dialogs';
 import { fetchFindUser } from "../../store/ducks/user/actions";
+import { fetchCreateDialog } from '../../store/ducks/dialogs/actions';
 
 import './SideBar.scss';
-import { dialogsApi } from '../../utils/api';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-const Sidebar = ({ onModalOk }) => {
+const Sidebar = () => {
     const user = useSelector((state) => state.user.data);
     const users = useSelector((state) => state.user.findUser);
 
@@ -51,15 +51,12 @@ const Sidebar = ({ onModalOk }) => {
     };
 
     const onAddDialog = () => {
-        dialogsApi
-            .create({
-                partner: selectedUserId,
-                text: messageText
-            })
-            .then(onClose)
-            .catch(() => {
-                setIsLoading(false);
-            });
+        dispatch(fetchCreateDialog({ partner: selectedUserId, text: messageText }));
+        onClose();
+            // .then(onClose)
+            // .catch(() => {
+            //     setIsLoading(false);
+            // })
     };
 
     return (
@@ -112,7 +109,7 @@ const Sidebar = ({ onModalOk }) => {
                         <Form.Item label="Введите текст сообщения">
                             <TextArea
                                 autosize={{ minRows: 3, maxRows: 10 }}
-                                style={{marginTop: 5}}
+                                style={{ marginTop: 5 }}
                                 onChange={onChangeTextArea}
                                 value={messageText}
                             />

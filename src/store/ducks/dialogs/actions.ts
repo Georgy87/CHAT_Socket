@@ -1,4 +1,5 @@
-import { DialogsActionType, DialogsInfoType, DialogueParticipantsType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
+import { UserInfo } from "../user/types";
+import { DialogsActionType, DialogsInfoType, DialogueParticipantsType, FetchCreateDialogType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
 
 export const setDialogs = (payload: DialogsInfoType<DialogueParticipantsType>[]): SetDialogsType => {
     return {
@@ -14,25 +15,17 @@ export const setCurrentDialogId = (payload: string): SetCurrentDialogIdType => {
     }
 }
 
+
 export const fetchDialogs  = (): FetchDialogsType => {
     return {
         type: DialogsActionType.FETCH_DIALOGS,
     }
 }
 
-// const actions = {
-//     setDialogs: (items) => ({
-//         type: "DIALOGS:SET_ITEMS",
-//         payload: items,
-//     }),
-//     setCurrentDialogId: (id) => ({
-//         type: "DIALOGS:SET_CURRENT_DIALOG_ID",
-//         payload: id,
-//     }),
-//     fetchDialogs: () => (dispatch) => {
-//         dialogsApi.getAll().then(({ data }) => {
-//             console.log(data);
-//             dispatch(actions.setDialogs(data));
-//         });
-//     },
-// };
+export const fetchCreateDialog = (payload: { partner: string; text: string }): FetchCreateDialogType => {
+    return {
+        type: DialogsActionType.FETCH_CREATE_DIALOG,
+        payload
+    }
+}
+

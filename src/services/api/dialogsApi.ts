@@ -5,7 +5,7 @@ export default {
         const { data } = await axios.get("/dialogs");
         return data;
     },
-    async create({ partner, text }: { partner: string; text: string }) {
-        axios.post("/dialogs", { partner, text });
+    create(payload: { partner: string; text: string }) {
+        axios.post("/dialogs", { partner: payload.partner, text: payload.text });
     }
 };
