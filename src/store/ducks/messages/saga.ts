@@ -13,8 +13,8 @@ export function* fetchSendMessageRequest({ payload }: FetchSendMessageType) {
 
 export function* fetchRemoveMessageByIdRequest({ payload }: FetchRemoveMessageByIdType) {
     try {
-        const { data } = yield call(messagesApi.removeById, payload);
-        yield put(removeMessageById(data));
+        yield call(messagesApi.removeById, payload);
+        yield put(removeMessageById(payload));
     } catch (error) {
         yield console.log(error);
     }

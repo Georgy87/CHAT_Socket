@@ -21,6 +21,7 @@ const messagesReducer = produce((draftState: Draft<MessageStateType>, action: Me
             draftState.isLoading = action.payload;
             break;
         case MessageActionType.REMOVE_MESSAGE:
+            console.log(action.payload)
             if (draftState.items) {
                 draftState.items = draftState.items.filter(message => message._id !== action.payload);
             }
