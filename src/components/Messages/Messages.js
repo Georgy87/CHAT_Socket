@@ -6,12 +6,11 @@ import classNames from "classnames";
 
 import Message from '../Message/Message';
 import socket from "../../core/socket";
-import { fetchMessages } from '../../store/ducks/messages/actions';
+import { fetchMessages, fetchRemoveMessageById } from '../../store/ducks/messages/actions';
 
 import actions from '../../redux/actions/messages';
 
 import "./Messages.scss";
-
 
 const Messages = () => {
     const dialogs = useSelector(state => state.dialogs);
@@ -60,7 +59,7 @@ const Messages = () => {
                             key={item._id}
                             {...item}
                             isMe={user._id === item.user._id}
-                            onRemoveMessage={() => dispatch(actions.removeMessageById(item._id))}
+                            onRemoveMessage={() => dispatch(fetchRemoveMessageById(item._id))}
                         />
                     })
                 ) : (

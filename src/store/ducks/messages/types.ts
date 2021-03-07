@@ -55,7 +55,7 @@ export type RemoveMessageByIdType = {
 
 export type FetchSendMessageType = {
     type: MessageActionType.FETCH_SEND_MESSAGE;
-    payload: { text: string, dialogId: string };
+    payload: { value: string, currentDialogId: string };
 }
 
 export type FetchRemoveMessageByIdType = {

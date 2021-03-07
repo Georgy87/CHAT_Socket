@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { FetchMessagesType, FetchRemoveMessageByIdType, FetchSendMessageType, MessageActionType } from "./types";
-import messagesApi from "../../../utils/api/messages";
+import { messagesApi } from "../../../services/api/messagesApi";
 import { setMessages, setIsLoading, removeMessageById } from './actions';
 
 export function* fetchSendMessageRequest({ payload }: FetchSendMessageType) {

@@ -5,7 +5,8 @@ import { Button, Input } from "antd";
 import { UploadField } from "@navjobs/upload";
 import { Picker } from "emoji-mart";
 import 'emoji-mart/css/emoji-mart.css';
-import actions from '../../redux/actions/messages';
+
+import { fetchSendMessages } from '../../store/ducks/messages/actions';
 
 import "./ChatInput.scss";
 
@@ -22,7 +23,7 @@ const ChatInput = () => {
 
     const handleSendMessage = e => {
         if (e.keyCode === 13) {
-            dispatch(actions.fetchSendMessage(value, currentDialogId));
+            dispatch(fetchSendMessages({ value, currentDialogId }));
             setValue("");
         }
     };
@@ -65,8 +66,8 @@ const ChatInput = () => {
                 {value ? (
                     <Button type="link" shape="circle" icon="check-circle" />
                 ) : (
-                        <Button type="link" shape="circle" icon="audio" />
-                    )}
+                    <Button type="link" shape="circle" icon="audio" />
+                )}
             </div>
         </div>
     );

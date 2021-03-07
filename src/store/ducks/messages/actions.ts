@@ -29,7 +29,8 @@ export const removeMessageById = (payload: string): RemoveMessageByIdType  => {
 }
 
 
-export const fetchSendMessages = (payload: { text: string, dialogId: string }): FetchSendMessageType => {
+export const fetchSendMessages = (payload: { value: string, currentDialogId: string }): FetchSendMessageType => {
+    console.log(payload);
     return {
         type: MessageActionType.FETCH_SEND_MESSAGE,
         payload

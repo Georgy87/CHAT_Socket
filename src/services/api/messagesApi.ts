@@ -1,19 +1,17 @@
 import { axios } from "../../core";
 
-export default {
+export const messagesApi = {
     async getAllByDialogId(id: string) {
-        const { data } = await axios.get("/messages?dialog=" + id);
-        return data;
+        return await axios.get("/messages?dialog=" + id);
     },
-    send(text: string, dialogId: string) {
+    send(payload: { value: string, currentDialogId: string }) {
         axios.post("/messages", {
-            text: text,
-            dialog_id: dialogId
+            value: payload.value,
+            dialog_id: payload.currentDialogId
         })
     },
     async removeById(id: string) {
-        const { data } = await axios.delete("/messages?id=" + id);
-        return data;
-    }
+        return await axios.delete("/messages?id=" + id);
+    },
 };
 
