@@ -1,28 +1,28 @@
 import React from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Modal, Select, Input, Form } from 'antd';
 import Icon from "@ant-design/icons";
-import Dialogs from '../Dialogs/Dialogs';
 
+import Dialogs from '../Dialogs/Dialogs';
+import { fetchFindUser } from "../../store/ducks/user/actions";
 
 import './SideBar.scss';
-import { useState } from 'react';
-import { userApi } from '../../utils/api';
-import { useSelector } from 'react-redux';
+import { dialogsApi } from '../../utils/api';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-const Sidebar = ({
-    selectedUserId,
-    onSelectUser,
-    onModalOk,
-}) => {
+const Sidebar = ({ onModalOk }) => {
     const user = useSelector((state) => state.user.data);
-    
-    const [users, setUsers] = useState([]);
+    const users = useSelector((state) => state.user.findUser);
+
+    const dispatch = useDispatch();
+
     const [visible, setVisible] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [messageText, setMessagaText] = useState("");
+    const [selectedUserId, setSelectedUserId] = useState(false);
 
     const options = users.map(user => <Option key={user._id}>{user.fullname}</Option>);
 
@@ -43,14 +43,20 @@ const Sidebar = ({
     };
 
     const onSearch = value => {
-        setIsLoading(true);
-        userApi
-            .findUsers(value)
-            .then(({ data }) => {
-                console.log(data);
-                setUsers(data);
-                setIsLoading(false);
+        dispatch(fetchFindUser(value));
+    };
+
+    const onSelectUser = userId => {
+        setSelectedUserId(userId);
+    };
+
+    const onAddDialog = () => {
+        dialogsApi
+            .create({
+                partner: selectedUserId,
+                text: messageText
             })
+            .then(onClose)
             .catch(() => {
                 setIsLoading(false);
             });
@@ -81,8 +87,7 @@ const Sidebar = ({
                         disabled={!messageText}
                         key="submit"
                         type="primary"
-                        // loading={isLoading}
-                        onClick={onModalOk}>
+                        onClick={onAddDialog}>
                         Создать
                     </Button>,
                 ]}>
@@ -107,6 +112,7 @@ const Sidebar = ({
                         <Form.Item label="Введите текст сообщения">
                             <TextArea
                                 autosize={{ minRows: 3, maxRows: 10 }}
+                                style={{marginTop: 5}}
                                 onChange={onChangeTextArea}
                                 value={messageText}
                             />

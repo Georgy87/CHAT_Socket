@@ -65,5 +65,6 @@ export function* UserSaga() {
     yield takeLatest(UserActionType.FETCH_USER_REGISTRATION, fetchUserRegistrationRequest);
     yield takeLatest(UserActionType.FETCH_USER_LOGIN, fetchUserLoginRequest);
     yield takeLatest(UserActionType.FETCH_VERIFY_HASH, fetchVerifyUserRequest);
+    yield takeLatest(UserActionType.FETCH_FIND_USER, fetchFindUserRequest);
 }
 

@@ -3,7 +3,7 @@ import React from "react";
 import Status from "../../components/Status/Status";
 import ChatInput from "../../components/ChatInput/ChatInput";
 import Messages from '../../components/Messages/Messages';
-import Sidebar from '../../containers/SideBar';
+import Sidebar from '../../components/SideBar/SideBar';
 
 import "./Home.scss";
 
