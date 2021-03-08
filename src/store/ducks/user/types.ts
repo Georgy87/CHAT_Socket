@@ -23,7 +23,6 @@ export type UserInfo = {
     password: string;
     createdAt: string;
     updatedAt: string;
-    __v: number;
     isOnline: boolean;
     id: string;
 }

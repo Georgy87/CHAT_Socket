@@ -13,6 +13,9 @@ declare global {
     }
 }
 
+type RootReducerType = typeof rootReducers; // (globalstate: AppStateType) => AppStateType
+export type AppStateType = ReturnType<RootReducerType>
+
 export const store = createStore(
     rootReducers,
     composeEnhancers(applyMiddleware(sagaMiddleware))

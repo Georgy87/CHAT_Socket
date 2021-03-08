@@ -22,10 +22,10 @@ export function* fetchRemoveMessageByIdRequest({ payload }: FetchRemoveMessageBy
 
 export function* fetchMessagesRequest({ payload }: FetchMessagesType) {
     try {
-        yield setIsLoading(true);
+        yield put(setIsLoading(true));
         const { data } = yield call(messagesApi.getAllByDialogId, payload);
         yield put(setMessages(data));
-        yield setIsLoading(false);
+        yield put(setIsLoading(false));
     } catch (error) {
         yield console.log(error);
     }

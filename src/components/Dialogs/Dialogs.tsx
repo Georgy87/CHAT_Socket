@@ -7,13 +7,20 @@ import { useEffect } from "react";
 
 import DialogItem from "../DialogItem/DialogItem";
 import socket from '../../core/socket';
-import actions from '../../redux/actions/dialogs';
 import { fetchDialogs } from '../../store/ducks/dialogs/actions';
+import { selectDialogItems, selectCurrentDialogId } from '../../store/ducks/dialogs/selectors';
+import { DialogsInfoType } from "../../store/ducks/dialogs/types";
+import { UserInfo } from "../../store/ducks/user/types";
 
 import "./Dialogs.scss";
 
-const Dialogs = ({ userId }) => {
-    const dialogs = useSelector((state) => state.dialogs.items);
+export type PropsType = {
+    userId: string;
+}
+
+const Dialogs: React.FC<PropsType> = ({ userId }) => {
+    const dialogs = useSelector(selectDialogItems);
+    const currentDialogId = useSelector(selectCurrentDialogId);
 
     const dispatch = useDispatch();
 
@@ -23,7 +30,7 @@ const Dialogs = ({ userId }) => {
     const onChangeInput = (value = "") => {
         setFiltredItems(
             dialogs.filter(
-                dialog =>
+                (dialog: any) =>
                     dialog.author.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
                     0 ||
                     dialog.partner.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
@@ -47,6 +54,7 @@ const Dialogs = ({ userId }) => {
         dispatch(fetchDialogs());
 
         socket.on("SERVER:DIALOG_CREATED", onNewDialog);
+        //@ts-ignore
         return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
     }, []);
     return (
@@ -59,22 +67,22 @@ const Dialogs = ({ userId }) => {
                 />
             </div>
             {dialogs ? (
-                orderBy(filtred, ["created_at"], ["desc"]).map((item) => {
+                orderBy(filtred, ["created_at"], ["desc"]).map((item: DialogsInfoType<UserInfo>) => {
                     return (
                         <DialogItem
                             key={item._id}
                             isMe={item.author._id === userId}
                             {...item}
+                            currentDialogId={currentDialogId}
                             userId={userId}
-                            // onSelect={onSelectDialog}
                         />
                     )
                 })
             ) : (
-                    <Empty
-                        description="Ничего не найдено"
-                    />
-                )}
+                <Empty
+                    description="Ничего не найдено"
+                />
+            )}
         </div>
     );
 };

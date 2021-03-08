@@ -11,22 +11,32 @@ import Avatar from "../Avatar/Avatar";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import actions from '../../redux/actions/dialogs';
+import { UserInfo } from "../../store/ducks/user/types";
+import { LastMessageType } from "../../store/ducks/dialogs/types";
 
-const getMessageTime = (created_at) => {
-    if (isToday(new Date(created_at))) {
-        return format(created_at, "HH:mm");
-    } else {
-        return format(new Date(created_at), "MM/dd/yyyy", {
-            locale: ruLocale,
-        });
-    }
-};
+// const getMessageTime = (created_at) => {
+//     if (isToday(new Date(created_at))) {
+//         return format(created_at, "HH:mm");
+//     } else {
+//         return format(new Date(created_at), "MM/dd/yyyy", {
+//             locale: ruLocale,
+//         });
+//     }
+// };
 
-const DialogItem = ({
+export type PropsType = {
+    _id: string;
+    createdAt: string;
+    isMe: boolean;
+    currentDialogId: string;
+    partner: UserInfo;
+    author: UserInfo;
+    lastMessage: LastMessageType;
+    userId: string;
+}
+
+const DialogItem: React.FC<PropsType> = ({
     _id,
-    undread,
-    created_at,
-    text,
     isMe,
     currentDialogId,
     partner,
@@ -34,7 +44,9 @@ const DialogItem = ({
     lastMessage,
     userId
 }) => {
+
     const dispatch = useDispatch();
+
     return (
         <Link to={`/dialog/${_id}`}>
             <div
@@ -45,7 +57,9 @@ const DialogItem = ({
                 onClick={() => dispatch(actions.setCurrentDialogId(_id))}
             >
                 <div className="dialogs__item-avatar">
-                    <Avatar user={author._id === userId ? partner : author} />
+                    {//@ts-ignore
+                    <Avatar user={author._id === userId ? partner : author} />}
+
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
@@ -56,9 +70,9 @@ const DialogItem = ({
                     <div className="dialogs__item-info-bottom">
                         <p>{lastMessage && lastMessage.text}</p>
                         {isMe && <IconReaded isMe={true} isReaded={false} />}
-                        {lastMessage && lastMessage.undread > 0 && (
+                        {lastMessage && lastMessage.unread && (
                             <div className="dialogs__item-info-bottom-count">
-                                {lastMessage && lastMessage.undread > 9 ? "+9" : lastMessage.undread}
+                                {lastMessage && lastMessage.unread ? "+9" : lastMessage.unread}
                             </div>
                         )}
                     </div>
