@@ -57,9 +57,7 @@ const DialogItem: React.FC<PropsType> = ({
                 onClick={() => dispatch(actions.setCurrentDialogId(_id))}
             >
                 <div className="dialogs__item-avatar">
-                    {//@ts-ignore
-                    <Avatar user={author._id === userId ? partner : author} />}
-
+                    <Avatar user={author._id === userId ? partner : author} />
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">

@@ -15,6 +15,7 @@
     "@types/react-dom": "^16.9.11",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
+    "@types/socket.io-client": "^1.4.35",
     "antd": "^4.10.3",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",

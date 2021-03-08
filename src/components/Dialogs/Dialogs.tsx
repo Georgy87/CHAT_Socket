@@ -52,9 +52,8 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
 
     useEffect(() => {
         dispatch(fetchDialogs());
-
         socket.on("SERVER:DIALOG_CREATED", onNewDialog);
-        //@ts-ignore
+
         return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
     }, []);
     return (

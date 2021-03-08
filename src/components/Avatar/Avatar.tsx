@@ -1,10 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import generateAvatarFromHash from "../../utils/helpers/generateAvatarFromHash";
+import { UserInfo } from "../../store/ducks/user/types";
 
 import "./Avatar.scss";
 
-const Avatar = ({ user }) => {
+export type PropsType = {
+    user: UserInfo;
+}
+const Avatar: React.FC<PropsType> = ({ user }): any => {
     if (user) {
         if (user.avatar) {
             return (
@@ -32,10 +35,6 @@ const Avatar = ({ user }) => {
             );
         }
     }
-};
-
-Avatar.propTypes = {
-    className: PropTypes.string,
 };
 
 export default Avatar;

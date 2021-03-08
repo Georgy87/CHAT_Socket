@@ -24,6 +24,7 @@ export type UserInfo = {
     createdAt: string;
     updatedAt: string;
     isOnline: boolean;
+    avatar?: string;
     id: string;
 }
 
