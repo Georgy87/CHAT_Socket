@@ -20,7 +20,10 @@ const Sidebar = () => {
     const dispatch = useDispatch();
 
     const [visible, setVisible] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+
+    const [inputValueDialog, setInputValueDialog] = useState("");
+    const [groupName, setGroupName] = useState("");
+
     const [messageText, setMessagaText] = useState("");
     const [selectedUserId, setSelectedUserId] = useState(false);
 
@@ -34,8 +37,12 @@ const Sidebar = () => {
         setVisible(true);
     };
 
-    const handleChangeInput = value => {
-        setInputValue(value);
+    const handleChangeInputDialog = value => {
+        setInputValueDialog(value);
+    };
+
+    const handleChangeInputGroup = e => {
+        setGroupName(e.target.value);
     };
 
     const onChangeTextArea = e => {
@@ -53,11 +60,11 @@ const Sidebar = () => {
     const onAddDialog = () => {
         dispatch(fetchCreateDialog({ partner: selectedUserId, text: messageText }));
         onClose();
-            // .then(onClose)
-            // .catch(() => {
-            //     setIsLoading(false);
-            // })
     };
+
+    const onAddGroupDialog = () => {
+        onClose();
+    }
 
     return (
         <div className="chat__sidebar">
@@ -91,9 +98,9 @@ const Sidebar = () => {
                 <Form className="add-dialog-form">
                     <Form.Item label="Введите имя пользователя или E-Mail">
                         <Select
-                            value={inputValue}
+                            value={inputValueDialog}
                             onSearch={onSearch}
-                            onChange={handleChangeInput}
+                            onChange={handleChangeInputDialog}
                             onSelect={onSelectUser}
                             notFoundContent={null}
                             style={{ width: '100%' }}
@@ -109,12 +116,28 @@ const Sidebar = () => {
                         <Form.Item label="Введите текст сообщения">
                             <TextArea
                                 autosize={{ minRows: 3, maxRows: 10 }}
-                                style={{ marginTop: 5 }}
+                                style={{ marginTop: 15 }}
                                 onChange={onChangeTextArea}
                                 value={messageText}
                             />
                         </Form.Item>
                     )}
+                    <div className="add-dialog-form__create-group">
+                        <Form.Item label="Создать группу курса:">
+                            <Input
+                                defaultValue={groupName}
+                                onChange={handleChangeInputGroup}
+                                style={{ width: '100%' }}
+                                placeholder="Введите название группы курса">
+                            </Input>
+                        </Form.Item>
+                        <Button
+                            onClick={onAddGroupDialog}
+                            className="add-dialog-form__create-btn"
+                            type="secondary">
+                            Создать группу
+                            </Button>
+                    </div>
                 </Form>
             </Modal>
         </div>
