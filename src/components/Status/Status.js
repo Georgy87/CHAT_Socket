@@ -10,6 +10,7 @@ const Status = () => {
     const currentDialogId = useSelector(state => state.dialogs.currentDialogId);
     const user = useSelector(state => state.user.data);
     const dialogsItems = useSelector(state => state.dialogs.items);
+    const isGroup = useSelector(state => state.dialogs.isPartnerOrGroup);
 
     const [partner, setPartner] = useState({});
 
@@ -20,7 +21,7 @@ const Status = () => {
             currentDialogObj = dialogsItems.filter(dialog => dialog._id === currentDialogId)[0];
 
             if (currentDialogObj.author._id === user._id) {
-                setPartner(currentDialogObj.partner);
+                setPartner(currentDialogObj.partner[0]);
             } else {
                 setPartner(currentDialogObj.author);
             }
@@ -30,15 +31,15 @@ const Status = () => {
     return (
         <div className="chat__dialog-header">
             {currentDialogId && <div className="chat__dialog-header-center">
-                <b className="chat__dialog-header-username">{partner.fullname}</b>
+                <b className="chat__dialog-header-username">{isGroup ? (<div>GROUP NAME</div>) : partner.fullname}</b>
                 <div className="chat__dialog-header-status">
-                    <div
+                    {!isGroup && <div
                         className={classNames("status", {
                             "status--online": partner.isOnline,
                         })}
                     >
                         {partner.isOnline ? "онлайн" : "офлайн"}
-                    </div>
+                    </div>}
                 </div>
             </div>}
         </div>

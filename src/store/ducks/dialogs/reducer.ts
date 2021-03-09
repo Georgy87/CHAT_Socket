@@ -1,11 +1,13 @@
 
 import produce, { Draft } from "immer";
+
 import { DialogsActionType, DialogsActionTypes, DialogsStateType } from "./types";
 
 const initialState: DialogsStateType = {
     items: [],
     currentDialogId: window.location.pathname.split("dialog/")[1],
     isLoading: false,
+    isPartnerOrGroup: false,
 }
 
 const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: DialogsActionTypes) => {
@@ -15,6 +17,9 @@ const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: Dia
             break;
         case  DialogsActionType.SET_CURRENT_DIALOG_ID:
             draftState.currentDialogId = action.payload;
+            break;
+        case  DialogsActionType.SET_CURRENT_STATUS:
+            draftState.isPartnerOrGroup = action.payload;
             break;
         default:
             break;

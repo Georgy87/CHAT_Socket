@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import actions from '../../redux/actions/dialogs';
 import { UserInfo } from "../../store/ducks/user/types";
+import { setCurrentStatus } from "../../store/ducks/dialogs/actions";
 
 
 // const getMessageTime = (created_at) => {
@@ -50,13 +51,23 @@ const DialogItem: React.FC<PropsType> = ({
 
     const dispatch = useDispatch();
 
-    const partnersIsOnline = partner.map(el => {
-        return el.isOnline;
-    });
+    const isOnePartner = 1;
+    let partnersIsOnline = null;
+
+    if (partner.length === isOnePartner - 1) {
+        partnersIsOnline = partner.map(el => {
+            return el.isOnline;
+        });
+    }
 
     const partners = partner.map(el => {
         return el;
     });
+
+    const onCurrentDialogInfo = () => {
+        dispatch(actions.setCurrentDialogId(_id));
+        dispatch(setCurrentStatus(partner.length > isOnePartner));
+    }
 
     return (
         <Link to={`/dialog/${_id}`}>
@@ -65,29 +76,28 @@ const DialogItem: React.FC<PropsType> = ({
                     "dialogs__item--online": author._id === userId ? partnersIsOnline : author.isOnline,
                     "dialogs__item--selected": currentDialogId === _id
                 })}
-                onClick={() => dispatch(actions.setCurrentDialogId(_id))}
+                onClick={onCurrentDialogInfo}
             >
                 <div className="dialogs__item-avatar">
-                    {partners.length > 1 ? <UsergroupAddOutlined /> :
+                    {partners.length > isOnePartner ? <UsergroupAddOutlined /> :
                         <Avatar user={author._id === userId ? partners : author} />
                     }
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        <b>{partners.length > 1 ? null :
+                        <b>{partners.length > isOnePartner ? null :
                             author._id === userId ? partner[0].fullname : author.fullname}
                         </b>
                         {/* <span>{getMessageTime("")}</span> */}
                     </div>
-
                     <div className="dialogs__item-info-bottom">
                         <p>{lastMessage && lastMessage.text}</p>
                         {isMe && <IconReaded isMe={true} isReaded={false} />}
-                        {lastMessage && lastMessage.unread && (
+                        {/* {lastMessage && lastMessage.unread && (
                             <div className="dialogs__item-info-bottom-count">
                                 {lastMessage && lastMessage.unread ? "+9" : lastMessage.unread}
                             </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
             </div>

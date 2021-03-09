@@ -1,5 +1,5 @@
 import { UserInfo } from "../user/types";
-import { DialogsActionType, DialogsInfoType, FetchCreateDialogType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
+import { DialogsActionType, DialogsInfoType, FetchCreateDialogType, FetchDialogsType, SetCurrentDialogIdType, SetCurrentStatusType, SetDialogsType } from "./types";
 
 export const setDialogs = (payload: DialogsInfoType[]): SetDialogsType => {
     return {
@@ -15,8 +15,15 @@ export const setCurrentDialogId = (payload: string): SetCurrentDialogIdType => {
     }
 }
 
+export const setCurrentStatus = (payload: boolean): SetCurrentStatusType => {
+    return {
+        type: DialogsActionType.SET_CURRENT_STATUS,
+        payload
+    }
+}
 
-export const fetchDialogs  = (): FetchDialogsType => {
+
+export const fetchDialogs = (): FetchDialogsType => {
     return {
         type: DialogsActionType.FETCH_DIALOGS,
     }

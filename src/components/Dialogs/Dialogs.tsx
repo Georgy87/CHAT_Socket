@@ -66,7 +66,6 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
                 />
             </div>
             {dialogs ? dialogs.map((item: any) => {
-
                 return (
                     <DialogItem
                         key={item._id}
