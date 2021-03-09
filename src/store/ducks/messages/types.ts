@@ -14,11 +14,20 @@ export enum MessageActionType {
     FETCH_MESSAGES = "MESSAGES:FETCH_MESSAGES",
 }
 
+export type MessagesItemsDialogType = {
+    _id: string;
+    author: string;
+    partner:  string;
+    createdAt: string;
+    updatedAt: string;
+    lastMessage: string;
+}
+
 export type MessageInfoType = {
     unread: boolean;
     _id: string;
     text: string;
-    dialog: DialogsInfoType<string>;
+    dialog: MessagesItemsDialogType;
     user: UserInfo;
     createdAt: string;
     updatedAt: string;

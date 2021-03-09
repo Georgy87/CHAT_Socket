@@ -19,31 +19,31 @@ export type LastMessageType = {
     updatedAt: string;
 }
 
-export type DialogueParticipantsType = {
-    confirmed: boolean;
-    last_seen: string;
-    _id: string;
-    email: string;
-    fullname: string;
-    password: string;
-    confirm_hash: string;
-    createdAt: string;
-    updatedAt: string;
-    isOnline: boolean;
-    id: string;
-}
+// export type DialogueParticipantsType = {
+//     confirmed: boolean;
+//     last_seen: string;
+//     _id: string;
+//     email: string;
+//     fullname: string;
+//     password: string;
+//     confirm_hash: string;
+//     createdAt: string;
+//     updatedAt: string;
+//     isOnline: boolean;
+//     id: string;
+// }
 
-export type DialogsInfoType<T> = {
+export type DialogsInfoType = {
     _id: string;
-    author: T;
-    partner: T;
+    author: UserInfo;
+    partner: UserInfo[];
     createdAt: string;
     updatedAt: string;
     lastMessage: LastMessageType;
 }
 
 export type DialogsStateType = {
-    items: DialogsInfoType<DialogueParticipantsType>[];
+    items: DialogsInfoType[];
     currentDialogId: string;
     isLoading: boolean;
 }
@@ -52,7 +52,7 @@ export type DialogsStateType = {
 
 export type SetDialogsType = {
     type: DialogsActionType.SET_ITEMS;
-    payload: DialogsInfoType<DialogueParticipantsType>[];
+    payload: DialogsInfoType[];
 }
 
 export type SetCurrentDialogIdType = {

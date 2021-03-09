@@ -25,30 +25,30 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
     const dispatch = useDispatch();
 
     const [inputValue, setValue] = useState("");
-    const [filtred, setFiltredItems] = useState(Array.from(dialogs));
+    // const [filtred, setFiltredItems] = useState(Array.from(dialogs));
 
-    const onChangeInput = (value = "") => {
-        setFiltredItems(
-            dialogs.filter(
-                (dialog: any) =>
-                    dialog.author.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
-                    0 ||
-                    dialog.partner.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
-                    0
-            )
-        );
-        setValue(value);
-    };
+    // const onChangeInput = (value = "") => {
+    //     setFiltredItems(
+    //         dialogs.filter(
+    //             (dialog: any) =>
+    //                 dialog.author.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
+    //                 0 ||
+    //                 dialog.partner.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
+    //                 0
+    //         )
+    //     );
+    //     setValue(value);
+    // };
 
     const onNewDialog = () => {
         dispatch(fetchDialogs());
     };
 
-    useEffect(() => {
-        if (dialogs.length) {
-            onChangeInput();
-        }
-    }, [dialogs]);
+    // useEffect(() => {
+    //     if (dialogs.length) {
+    //         onChangeInput();
+    //     }
+    // }, [dialogs]);
 
     useEffect(() => {
         dispatch(fetchDialogs());
@@ -61,27 +61,27 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
             <div className="dialogs__search">
                 <Input.Search
                     placeholder="Поиск среди контактов"
-                    onChange={(e) => onChangeInput(e.target.value)}
+                    // onChange={(e) => onChangeInput(e.target.value)}
                     value={inputValue}
                 />
             </div>
-            {dialogs ? (
-                orderBy(filtred, ["created_at"], ["desc"]).map((item: DialogsInfoType<UserInfo>) => {
-                    return (
-                        <DialogItem
-                            key={item._id}
-                            isMe={item.author._id === userId}
-                            {...item}
-                            currentDialogId={currentDialogId}
-                            userId={userId}
-                        />
-                    )
-                })
-            ) : (
-                <Empty
-                    description="Ничего не найдено"
-                />
-            )}
+            {dialogs ? dialogs.map((item: any) => {
+
+                return (
+                    <DialogItem
+                        key={item._id}
+                        isMe={item.author._id === userId}
+                        {...item}
+                        currentDialogId={currentDialogId}
+                        userId={userId}
+                    />
+                )
+            })
+                : (
+                    <Empty
+                        description="Ничего не найдено"
+                    />
+                )}
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { UserInfo } from "../user/types";
-import { DialogsActionType, DialogsInfoType, DialogueParticipantsType, FetchCreateDialogType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
+import { DialogsActionType, DialogsInfoType, FetchCreateDialogType, FetchDialogsType, SetCurrentDialogIdType, SetDialogsType } from "./types";
 
-export const setDialogs = (payload: DialogsInfoType<DialogueParticipantsType>[]): SetDialogsType => {
+export const setDialogs = (payload: DialogsInfoType[]): SetDialogsType => {
     return {
         type: DialogsActionType.SET_ITEMS,
         payload
