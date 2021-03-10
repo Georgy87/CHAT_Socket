@@ -41,7 +41,7 @@ export type DialogsInfoType = {
     partner: UserInfo[];
     createdAt: string;
     updatedAt: string;
-    nameGroup: string;
+    groupName: string;
     lastMessage: LastMessageType;
 }
 

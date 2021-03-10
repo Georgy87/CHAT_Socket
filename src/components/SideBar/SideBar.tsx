@@ -153,8 +153,4 @@ const Sidebar = () => {
     );
 };
 
-Sidebar.defaultProps = {
-    users: [],
-};
-
 export default Sidebar;
