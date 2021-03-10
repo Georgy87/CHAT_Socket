@@ -4,8 +4,9 @@ import Icon from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 import validateField from "../../../utils/helpers/validateField";
-import { Button, FormField } from "../../../components";
+import { Button } from "../../../components";
 import Block from '../../../components/Block/Block';
+import { FormField } from '../../../components/FormField/FormField';
 
 const success = false;
 

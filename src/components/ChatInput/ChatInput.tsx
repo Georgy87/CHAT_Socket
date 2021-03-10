@@ -2,27 +2,30 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Button, Input } from "antd";
+//@ts-ignore
 import { UploadField } from "@navjobs/upload";
 import { Picker } from "emoji-mart";
 import 'emoji-mart/css/emoji-mart.css';
 
 import { fetchSendMessages } from '../../store/ducks/messages/actions';
+import { selectCurrentDialogId } from "../../store/ducks/dialogs/selectors";
 
 import "./ChatInput.scss";
+
 
 const ChatInput = () => {
     const dispatch = useDispatch();
 
     const [value, setValue] = useState("");
     const [emojiPickerVisible, setShowEmojiPicker] = useState(false);
-    const currentDialogId = useSelector(state => state.dialogs.currentDialogId);
+    const currentDialogId = useSelector(selectCurrentDialogId);
 
     const toggleEmojiPicker = () => {
         setShowEmojiPicker(!emojiPickerVisible);
     };
 
-    const handleSendMessage = e => {
-        if (e.keyCode === 13) {
+    const handleSendMessage = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
             dispatch(fetchSendMessages({ value, currentDialogId }));
             setValue("");
         }
@@ -52,7 +55,7 @@ const ChatInput = () => {
             />
             <div className="chat-input__actions">
                 <UploadField
-                    onFiles={(files) => console.log(files)}
+                    onFiles={(files: File[]) => console.log(files)}
                     containerProps={{
                         className: "chat-input__actions-upload-btn",
                     }}
@@ -71,10 +74,6 @@ const ChatInput = () => {
             </div>
         </div>
     );
-};
-
-ChatInput.propTypes = {
-    className: PropTypes.string,
 };
 
 export default ChatInput;

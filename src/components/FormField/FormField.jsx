@@ -4,7 +4,7 @@ import Icon from "@ant-design/icons";
 
 import { validateField } from "../../utils/helpers";
 
-const FormField = ({
+export const FormField = ({
     name,
     placeholder,
     icon,
@@ -34,5 +34,3 @@ const FormField = ({
         </Form.Item>
     );
 };
-
-export default FormField;

@@ -16,5 +16,4 @@ const Block: React.FC<PropsType> = ({ children, className }) => {
     );
 };
 
-
 export default Block;
