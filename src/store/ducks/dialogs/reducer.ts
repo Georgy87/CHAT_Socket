@@ -8,6 +8,7 @@ const initialState: DialogsStateType = {
     currentDialogId: window.location.pathname.split("dialog/")[1],
     isLoading: false,
     isPartnerOrGroup: false,
+    groupName: '',
 }
 
 const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: DialogsActionTypes) => {
@@ -20,6 +21,9 @@ const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: Dia
             break;
         case  DialogsActionType.SET_CURRENT_STATUS:
             draftState.isPartnerOrGroup = action.payload;
+            break;
+        case  DialogsActionType.SET_GROUP_NAME:
+            draftState.groupName = action.payload;
             break;
         default:
             break;

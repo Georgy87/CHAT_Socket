@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import actions from '../../redux/actions/dialogs';
 import { UserInfo } from "../../store/ducks/user/types";
-import { setCurrentStatus } from "../../store/ducks/dialogs/actions";
+import { setCurrentStatus, setGroupName } from "../../store/ducks/dialogs/actions";
 
 
 // const getMessageTime = (created_at) => {
@@ -35,8 +35,9 @@ export type PropsType = {
     currentDialogId: string;
     partner: UserInfo[];
     author: UserInfo;
+    groupName?: string;
     lastMessage: LastMessageType;
-    userId: string;
+    userId?: string;
 }
 
 const DialogItem: React.FC<PropsType> = ({
@@ -46,6 +47,7 @@ const DialogItem: React.FC<PropsType> = ({
     partner,
     author,
     lastMessage,
+    groupName,
     userId
 }) => {
 
@@ -66,6 +68,9 @@ const DialogItem: React.FC<PropsType> = ({
 
     const onCurrentDialogInfo = () => {
         dispatch(actions.setCurrentDialogId(_id));
+        if (groupName) {
+            dispatch(setGroupName(groupName));
+        }
         dispatch(setCurrentStatus(partner.length > isOnePartner));
     }
 

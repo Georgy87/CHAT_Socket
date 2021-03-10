@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import classNames from "classnames";
 import { UserInfo } from "../../store/ducks/user/types";
-import { selectCurrentDialogId, selectDialogItems, selectIsPartnerOrGroup } from "../../store/ducks/dialogs/selectors";
+import { selectCurrentDialogId, selectDialogItems, selectGroupName, selectIsPartnerOrGroup } from "../../store/ducks/dialogs/selectors";
 import { selectUserData } from "../../store/ducks/user/selectors";
 
 import "./Status.scss";
@@ -14,6 +14,7 @@ const Status = () => {
     const user = useSelector(selectUserData);
     const dialogsItems = useSelector(selectDialogItems);
     const isGroup = useSelector(selectIsPartnerOrGroup);
+    const groupName = useSelector(selectGroupName);
 
     const [partner, setPartner] = useState<UserInfo>();
 
@@ -31,18 +32,10 @@ const Status = () => {
         }
     }, [currentDialogId]);
 
-    let name = "GROUP NAME";
-
-    dialogsItems.map((el: any) => {
-        if (el.groupName) {
-            name = el.groupName;
-        }
-    });
-
     return (
         <div className="chat__dialog-header">
             {currentDialogId && <div className="chat__dialog-header-center">
-                <b className="chat__dialog-header-username">{isGroup ? (<div>{name}</div>) : partner?.fullname}</b>
+                <b className="chat__dialog-header-username">{isGroup ? (<div>{groupName}</div>) : partner?.fullname}</b>
                 <div className="chat__dialog-header-status">
                     {!isGroup && <div
                         className={classNames("status", {
