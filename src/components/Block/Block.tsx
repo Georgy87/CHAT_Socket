@@ -3,8 +3,12 @@ import classNames from "classnames";
 
 import "./Block.scss";
 
-const Block = ({ children, className }) => {
+type PropsType = {
+    children: React.ReactNode;
+    className: string;
+}
 
+const Block: React.FC<PropsType> = ({ children, className }) => {
     return (
         <div className={classNames('block', className)}>
             {children}
