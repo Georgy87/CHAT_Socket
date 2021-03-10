@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import ruLocale from "date-fns/locale/ru";
 import classNames from "classnames";
+import { EllipsisOutlined } from "@ant-design/icons";
+
 import readedSvg from "../../assets/img/readed.svg";
 import noReadedSvg from "../../assets/img/noreaded.svg";
 import waveSvg from "../../assets/img/wave.svg";
@@ -13,7 +15,7 @@ import Avatar from '../Avatar/Avatar';
 // import { Popover, Button } from "antd";
 import { Popover } from "antd";
 import Icon from '@ant-design/icons';
-import { EllipsisOutlined } from "@ant-design/icons";
+
 import { Button } from "antd";
 
 import "./Message.scss";

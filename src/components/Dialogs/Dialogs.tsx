@@ -15,7 +15,7 @@ import { UserInfo } from "../../store/ducks/user/types";
 import "./Dialogs.scss";
 
 export type PropsType = {
-    userId: string;
+    userId?: string;
 }
 
 const Dialogs: React.FC<PropsType> = ({ userId }) => {

@@ -12,7 +12,6 @@ import { selectCurrentDialogId } from "../../store/ducks/dialogs/selectors";
 
 import "./ChatInput.scss";
 
-
 const ChatInput = () => {
     const dispatch = useDispatch();
 

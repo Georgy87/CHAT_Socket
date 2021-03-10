@@ -7,18 +7,21 @@ import Icon from "@ant-design/icons";
 import Dialogs from '../Dialogs/Dialogs';
 import { fetchFindUser } from "../../store/ducks/user/actions";
 import { fetchCreateDialog, fetchCreateGroupDialog } from '../../store/ducks/dialogs/actions';
+import { selectFindUser, selectUserData } from "../../store/ducks/user/selectors";
+import { selectDialogItems } from '../../store/ducks/dialogs/selectors';
+import { UserInfo } from '../../store/ducks/user/types';
 
 import './SideBar.scss';
+import { ChangeEventHandler } from 'react';
 
-const { Option } = Select;
+const { Option }: any = Select;
+
 const { TextArea } = Input;
 
 const Sidebar = () => {
-    const user = useSelector((state) => state.user.data);
-
-    const users = useSelector((state) => state.user.findUser);
-    const dialogs = useSelector((state) => state.dialogs.items);
-
+    const user = useSelector(selectUserData);
+    const users = useSelector(selectFindUser);
+    const dialogs = useSelector(selectDialogItems);
 
     const dispatch = useDispatch();
 
@@ -28,10 +31,9 @@ const Sidebar = () => {
     const [groupName, setGroupName] = useState("");
 
     const [messageText, setMessagaText] = useState("");
-    const [selectedUserId, setSelectedUserId] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState("");
 
-    const options = users.map(user => <Option key={user._id}>{user.fullname}</Option>);
-
+    const options = users.map((user: UserInfo) => <Option key={user._id}>{user.fullname}</Option>);
 
     const onClose = () => {
         setVisible(false);
@@ -41,23 +43,23 @@ const Sidebar = () => {
         setVisible(true);
     };
 
-    const handleChangeInputDialog = value => {
+    const handleChangeInputDialog = (value: string) => {
         setInputValueDialog(value);
     };
 
-    const handleChangeInputGroup = e => {
+    const handleChangeInputGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
         setGroupName(e.target.value);
     };
 
-    const onChangeTextArea = e => {
+    const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMessagaText(e.target.value);
     };
 
-    const onSearch = value => {
+    const onSearch = (value: string) => {
         dispatch(fetchFindUser(value));
     };
 
-    const onSelectUser = userId => {
+    const onSelectUser = (userId: string) => {
         setSelectedUserId(userId);
     };
 
@@ -67,8 +69,10 @@ const Sidebar = () => {
     };
 
     const onAddGroupDialog = () => {
-        dispatch(fetchCreateGroupDialog({ partner: user._id, text: '', nameGroup: groupName }));
-        onClose();
+        if (user?._id) {
+            dispatch(fetchCreateGroupDialog({ partner: user._id, text: '', nameGroup: groupName }));
+            onClose();
+        }
     }
 
     return (
@@ -82,7 +86,7 @@ const Sidebar = () => {
             </div>
 
             <div className="chat__sidebar-dialogs">
-                <Dialogs userId={user && user._id} />
+                <Dialogs userId={user?._id} />
             </div>
             <Modal
                 title="Создать диалог"
@@ -120,7 +124,7 @@ const Sidebar = () => {
                     {selectedUserId && (
                         <Form.Item label="Введите текст сообщения">
                             <TextArea
-                                autosize={{ minRows: 3, maxRows: 10 }}
+                                autoSize={{ minRows: 3, maxRows: 10 }}
                                 style={{ marginTop: 15 }}
                                 onChange={onChangeTextArea}
                                 value={messageText}
@@ -139,7 +143,7 @@ const Sidebar = () => {
                         <Button
                             onClick={onAddGroupDialog}
                             className="add-dialog-form__create-btn"
-                            type="secondary">
+                            type="dashed">
                             Создать группу
                             </Button>
                     </div>
