@@ -28,10 +28,18 @@ const Status = () => {
         }
     }, [currentDialogId]);
 
+    let name = "GROUP NAME";
+
+    dialogsItems.map(el => {
+        if (el.groupName) {
+            name = el.groupName;
+        }
+    });
+
     return (
         <div className="chat__dialog-header">
             {currentDialogId && <div className="chat__dialog-header-center">
-                <b className="chat__dialog-header-username">{isGroup ? (<div>GROUP NAME</div>) : partner.fullname}</b>
+                <b className="chat__dialog-header-username">{isGroup ? (<div>{name}</div>) : partner.fullname}</b>
                 <div className="chat__dialog-header-status">
                     {!isGroup && <div
                         className={classNames("status", {

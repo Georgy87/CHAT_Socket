@@ -15,7 +15,10 @@ const { TextArea } = Input;
 
 const Sidebar = () => {
     const user = useSelector((state) => state.user.data);
+
     const users = useSelector((state) => state.user.findUser);
+    const dialogs = useSelector((state) => state.dialogs.items);
+
 
     const dispatch = useDispatch();
 
@@ -28,6 +31,7 @@ const Sidebar = () => {
     const [selectedUserId, setSelectedUserId] = useState(false);
 
     const options = users.map(user => <Option key={user._id}>{user.fullname}</Option>);
+
 
     const onClose = () => {
         setVisible(false);
@@ -63,6 +67,7 @@ const Sidebar = () => {
     };
 
     const onAddGroupDialog = () => {
+        dispatch(fetchCreateDialog({ partner: user._id, text: '', nameGroup: groupName }));
         onClose();
     }
 

@@ -16,7 +16,7 @@ export function* fetchDialogsRequest() {
 
 export function* fetchCreateDialogRequest({ payload }: FetchCreateDialogType) {
     try {
-        yield call(dialogsApi.create, payload);
+        yield call(dialogsApi.createDialog, payload);
     } catch (err) {
         console.log(err);
     }

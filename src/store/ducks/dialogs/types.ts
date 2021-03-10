@@ -6,6 +6,7 @@ export enum DialogsActionType {
     FETCH_DIALOGS = "DIALOGS:FETCH_DIALOGS",
     FETCH_CREATE_DIALOG = "DIALOGS:FETCH_CREATE_DIALOG",
     SET_CURRENT_STATUS = "DIALOGS:SET_CURRENT_STATUS",
+    FETCH_CREATE_GROUP_DIALOG = "DIALOGS:FETCH_CREATE_GROUP_DIALOG",
 }
 
 // state types
@@ -40,6 +41,7 @@ export type DialogsInfoType = {
     partner: UserInfo[];
     createdAt: string;
     updatedAt: string;
+    nameGroup: string;
     lastMessage: LastMessageType;
 }
 
@@ -76,7 +78,12 @@ export type FetchDialogsType = {
 
 export type FetchCreateDialogType = {
     type: DialogsActionType.FETCH_CREATE_DIALOG;
-    payload: { partner: string; text: string };
+    payload: { partner: string; text: string; };
+}
+
+export type FetchCreateGroupDialogType = {
+    type: DialogsActionType.FETCH_CREATE_GROUP_DIALOG;
+    payload: { partner: string; text: string; nameGroup: string; };
 }
 
 
