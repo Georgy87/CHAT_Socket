@@ -6,7 +6,7 @@ import Icon from "@ant-design/icons";
 
 import Dialogs from '../Dialogs/Dialogs';
 import { fetchFindUser } from "../../store/ducks/user/actions";
-import { fetchCreateDialog } from '../../store/ducks/dialogs/actions';
+import { fetchCreateDialog, fetchCreateGroupDialog } from '../../store/ducks/dialogs/actions';
 
 import './SideBar.scss';
 
@@ -67,7 +67,7 @@ const Sidebar = () => {
     };
 
     const onAddGroupDialog = () => {
-        dispatch(fetchCreateDialog({ partner: user._id, text: '', nameGroup: groupName }));
+        dispatch(fetchCreateGroupDialog({ partner: user._id, text: '', nameGroup: groupName }));
         onClose();
     }
 
