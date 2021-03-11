@@ -11,7 +11,7 @@ import ruLocale from "date-fns/locale/ru";
 import { generateAvatarFromHash } from "../../utils/helpers";
 import IconReaded from "../IconReaded/index";
 import Avatar from "../Avatar/Avatar";
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import actions from '../../redux/actions/dialogs';
 import { UserInfo } from "../../store/ducks/user/types";
@@ -51,6 +51,8 @@ const DialogItem: React.FC<PropsType> = ({
     createdAt
 }) => {
 
+   
+
     const dispatch = useDispatch();
 
     const isOnePartner = 1;
@@ -77,7 +79,7 @@ const DialogItem: React.FC<PropsType> = ({
     }
 
     return (
-        <Link to={`/dialog/${_id}`}>
+        <NavLink to={`/dialog/${_id}`}>
             <div
                 className={classNames("dialogs__item", {
                     "dialogs__item--online": author._id === userId ? partnersIsOnline : author.isOnline,
@@ -109,7 +111,7 @@ const DialogItem: React.FC<PropsType> = ({
                     </div>
                 </div>
             </div>
-        </Link>
+        </NavLink>
     )
 }
 

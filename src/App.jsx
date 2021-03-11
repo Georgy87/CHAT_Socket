@@ -7,11 +7,11 @@ const App = () => {
     const isAuth = useSelector(state => state.user.isAuth);
     const history = useHistory();
 
-    useEffect(() => {
-        if (isAuth) {
-            history.push('/');
-        }
-    }, [isAuth]);
+    // useEffect(() => {
+    //     if (isAuth) {
+    //         history.push('/');
+    //     }
+    // }, [isAuth]);
 
     return (
         <div className="wrapper">
@@ -22,8 +22,9 @@ const App = () => {
                     component={Auth}
                 />
                 <Route
-                    path="/"
-                    render={() => (isAuth ? <Home /> : <Redirect to="/" />)}
+                    exact
+                    path={["/","/dialog/:id?"]}
+                    render={() => <Home />}
                 />
             </Switch>
         </div>

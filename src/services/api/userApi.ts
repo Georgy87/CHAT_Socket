@@ -18,7 +18,6 @@ export const userApi = {
         password: string;
     }) {
         return axios.post<SignInApiType>("/user/signin", payload).then((res) => {
-            console.log(res.data);
             if (res.data.status === "success") {
                 openNotification({
                     title: 'Отлично!',

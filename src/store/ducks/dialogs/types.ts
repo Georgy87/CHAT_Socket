@@ -7,7 +7,8 @@ export enum DialogsActionType {
     FETCH_CREATE_DIALOG = "DIALOGS:FETCH_CREATE_DIALOG",
     SET_CURRENT_STATUS = "DIALOGS:SET_CURRENT_STATUS",
     FETCH_CREATE_GROUP_DIALOG = "DIALOGS:FETCH_CREATE_GROUP_DIALOG",
-    SET_DIALOG_NAME = "DIALOGS:SET_DIALOG_NAME"
+    SET_DIALOG_NAME = "DIALOGS:SET_DIALOG_NAME",
+    FETCH_DIALOG_BY_ID = "DIALOGS:FETCH_DIALOG_BY_ID"
 }
 
 // state types
@@ -80,7 +81,6 @@ export type SetDialogNameType = {
 
 export type FetchDialogsType = {
     type: DialogsActionType.FETCH_DIALOGS;
-    payload: string;
 }
 
 export type FetchCreateDialogType = {
@@ -93,6 +93,10 @@ export type FetchCreateGroupDialogType = {
     payload: { partner: string; text: string; nameGroup: string; };
 }
 
+export type FetchDialogByIdType = {
+    type: DialogsActionType.FETCH_DIALOG_BY_ID;
+    payload: string;
+}
 
 export type DialogsActionTypes = SetDialogsType | SetCurrentDialogIdType | FetchDialogsType | SetCurrentStatusType | SetDialogNameType;
 

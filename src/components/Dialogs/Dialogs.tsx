@@ -7,12 +7,13 @@ import { useEffect } from "react";
 
 import DialogItem from "../DialogItem/DialogItem";
 import socket from '../../core/socket';
-import { fetchDialogs } from '../../store/ducks/dialogs/actions';
+import { fetchDialogById, fetchDialogs, setCurrentDialogId } from '../../store/ducks/dialogs/actions';
 import { selectDialogItems, selectCurrentDialogId } from '../../store/ducks/dialogs/selectors';
 import { DialogsInfoType } from "../../store/ducks/dialogs/types";
 import { UserInfo } from "../../store/ducks/user/types";
 
 import "./Dialogs.scss";
+import { useParams } from "react-router";
 
 export type PropsType = {
     userId?: string;
@@ -21,6 +22,9 @@ export type PropsType = {
 const Dialogs: React.FC<PropsType> = ({ userId }) => {
     const dialogs = useSelector(selectDialogItems);
     const currentDialogId = useSelector(selectCurrentDialogId);
+
+    const params: { id: any} = useParams();
+    const id = params.id;
 
     const dispatch = useDispatch();
 
@@ -41,7 +45,7 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
     // };
 
     const onNewDialog = () => {
-        dispatch(fetchDialogs(currentDialogId));
+        dispatch(fetchDialogs());
     };
 
     // useEffect(() => {
@@ -52,10 +56,16 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
 
     useEffect(() => {
         dispatch(fetchDialogs());
+        // dispatch(fetchDialogById(currentDialogId));
         socket.on("SERVER:DIALOG_CREATED", onNewDialog);
 
         return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
     }, []);
+
+    useEffect(() => {
+        dispatch(fetchDialogById(id));
+    }, [id]);
+
     return (
         <div className="dialogs">
             <div className="dialogs__search">

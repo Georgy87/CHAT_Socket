@@ -18,6 +18,12 @@ const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: Dia
             break;
         case DialogsActionType.SET_CURRENT_DIALOG_ID:
             draftState.currentDialogId = action.payload;
+            // draftState.items.forEach((el) => {
+            //     if (el._id === action.payload) {
+            //         console.log(el.dialogName);
+            //         return  draftState.dialogName = el.dialogName;
+            //     }
+            // });
             break;
         case DialogsActionType.SET_CURRENT_STATUS:
             draftState.isPartnerOrGroup = action.payload;
