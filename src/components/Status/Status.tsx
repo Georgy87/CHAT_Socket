@@ -15,6 +15,7 @@ const Status = () => {
     const dialogsItems = useSelector(selectDialogItems);
     const isGroup = useSelector(selectIsPartnerOrGroup);
     const groupName = useSelector(selectGroupName);
+    console.log(groupName);
 
     const [partner, setPartner] = useState<UserInfo>();
 

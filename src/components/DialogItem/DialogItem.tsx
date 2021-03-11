@@ -15,18 +15,17 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import actions from '../../redux/actions/dialogs';
 import { UserInfo } from "../../store/ducks/user/types";
-import { setCurrentStatus, setGroupName } from "../../store/ducks/dialogs/actions";
+import { setCurrentDialogId, setCurrentStatus, setDialogName } from "../../store/ducks/dialogs/actions";
 
-
-// const getMessageTime = (created_at) => {
-//     if (isToday(new Date(created_at))) {
-//         return format(created_at, "HH:mm");
-//     } else {
-//         return format(new Date(created_at), "MM/dd/yyyy", {
-//             locale: ruLocale,
-//         });
-//     }
-// };
+const getMessageTime = (created_at: Date) => {
+    if (isToday(new Date(created_at))) {
+        return format(created_at, "HH:mm");
+    } else {
+        return format(new Date(created_at), "MM/dd/yyyy", {
+            locale: ruLocale,
+        });
+    }
+};
 
 export type PropsType = {
     _id: string;
@@ -35,7 +34,7 @@ export type PropsType = {
     currentDialogId: string;
     partner: UserInfo[];
     author: UserInfo;
-    groupName?: string;
+    dialogName: string;
     lastMessage: LastMessageType;
     userId?: string;
 }
@@ -47,8 +46,9 @@ const DialogItem: React.FC<PropsType> = ({
     partner,
     author,
     lastMessage,
-    groupName,
-    userId
+    dialogName,
+    userId,
+    createdAt
 }) => {
 
     const dispatch = useDispatch();
@@ -67,10 +67,12 @@ const DialogItem: React.FC<PropsType> = ({
     });
 
     const onCurrentDialogInfo = () => {
-        dispatch(actions.setCurrentDialogId(_id));
-        if (groupName) {
-            dispatch(setGroupName(groupName));
+        dispatch(setCurrentDialogId(_id));
+
+        if (dialogName) {
+            dispatch(setDialogName(dialogName));
         }
+
         dispatch(setCurrentStatus(partner.length > isOnePartner));
     }
 
@@ -90,10 +92,11 @@ const DialogItem: React.FC<PropsType> = ({
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        <b>{partners.length > isOnePartner ? null :
+                        <b>{partners.length > isOnePartner ? dialogName :
                             author._id === userId ? partner[0].fullname : author.fullname}
                         </b>
-                        {/* <span>{getMessageTime("")}</span> */}
+                        <span>{getMessageTime(new Date(createdAt))}
+                        </span>
                     </div>
                     <div className="dialogs__item-info-bottom">
                         <p>{lastMessage && lastMessage.text}</p>

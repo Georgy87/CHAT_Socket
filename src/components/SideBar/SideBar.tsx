@@ -13,6 +13,7 @@ import { UserInfo } from '../../store/ducks/user/types';
 
 import './SideBar.scss';
 import { ChangeEventHandler } from 'react';
+import { ReactNode } from 'react';
 
 const { Option }: any = Select;
 
@@ -32,8 +33,11 @@ const Sidebar = () => {
 
     const [messageText, setMessagaText] = useState("");
     const [selectedUserId, setSelectedUserId] = useState("");
+    const [partnerName, setPartnerName] = useState("");
 
-    const options = users.map((user: UserInfo) => <Option key={user._id}>{user.fullname}</Option>);
+    const options = users.map((user: UserInfo) => {
+        return <Option key={user._id} >{user.fullname}</Option>
+    });
 
     const onClose = () => {
         setVisible(false);
@@ -43,8 +47,8 @@ const Sidebar = () => {
         setVisible(true);
     };
 
-    const handleChangeInputDialog = (value: string) => {
-        setInputValueDialog(value);
+    const handleChangeInputDialog = (value: any) => {
+        setInputValueDialog(value.label);
     };
 
     const handleChangeInputGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,12 +63,13 @@ const Sidebar = () => {
         dispatch(fetchFindUser(value));
     };
 
-    const onSelectUser = (userId: string) => {
-        setSelectedUserId(userId);
+    const onSelectUser = (value: any) => {
+        setSelectedUserId(value.key);
+        setPartnerName(value.label);
     };
 
     const onAddDialog = () => {
-        dispatch(fetchCreateDialog({ partner: selectedUserId, text: messageText }));
+        dispatch(fetchCreateDialog({ partner: selectedUserId, text: messageText, partnerName: partnerName }));
         onClose();
     };
 
@@ -74,6 +79,8 @@ const Sidebar = () => {
             onClose();
         }
     }
+
+
 
     return (
         <div className="chat__sidebar">
@@ -107,7 +114,8 @@ const Sidebar = () => {
                 <Form className="add-dialog-form">
                     <Form.Item label="Введите имя пользователя или E-Mail">
                         <Select
-                            value={inputValueDialog}
+                            defaultValue={inputValueDialog}
+                            labelInValue
                             onSearch={onSearch}
                             onChange={handleChangeInputDialog}
                             onSelect={onSelectUser}

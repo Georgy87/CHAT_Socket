@@ -41,7 +41,7 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
     // };
 
     const onNewDialog = () => {
-        dispatch(fetchDialogs());
+        dispatch(fetchDialogs(currentDialogId));
     };
 
     // useEffect(() => {

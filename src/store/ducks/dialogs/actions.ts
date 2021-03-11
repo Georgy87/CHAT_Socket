@@ -1,5 +1,5 @@
 import { UserInfo } from "../user/types";
-import { DialogsActionType, DialogsInfoType, FetchCreateDialogType, FetchCreateGroupDialogType, FetchDialogsType, SetCurrentDialogIdType, SetCurrentStatusType, SetDialogsType, SetGroupNameType } from "./types";
+import { DialogsActionType, DialogsInfoType, FetchCreateDialogType, FetchCreateGroupDialogType, FetchDialogsType, SetCurrentDialogIdType, SetCurrentStatusType, SetDialogNameType, SetDialogsType } from "./types";
 
 // ACTIONS
 
@@ -24,22 +24,23 @@ export const setCurrentStatus = (payload: boolean): SetCurrentStatusType => {
     }
 }
 
-export const setGroupName = (payload: string): SetGroupNameType => {
+export const setDialogName = (payload: string): SetDialogNameType => {
     return {
-        type: DialogsActionType.SET_GROUP_NAME,
+        type: DialogsActionType.SET_DIALOG_NAME,
         payload
     }
 }
 
 // FETCH
 
-export const fetchDialogs = (): FetchDialogsType => {
+export const fetchDialogs = (payload: string): FetchDialogsType => {
     return {
         type: DialogsActionType.FETCH_DIALOGS,
+        payload
     }
 }
 
-export const fetchCreateDialog = (payload: { partner: string; text: string; }): FetchCreateDialogType => {
+export const fetchCreateDialog = (payload: { partner: string; text: string; partnerName: string }): FetchCreateDialogType => {
     return {
         type: DialogsActionType.FETCH_CREATE_DIALOG,
         payload

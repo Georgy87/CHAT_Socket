@@ -1,13 +1,13 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 
-import { DialogsActionType, DialogsInfoType, FetchCreateDialogType, FetchCreateGroupDialogType } from "./types";
+import { DialogsActionType, DialogsInfoType, FetchCreateDialogType, FetchCreateGroupDialogType, FetchDialogsType } from "./types";
 import dialogsApi from "../../../services/api/dialogsApi";
 import { setDialogs } from './actions';
 import { UserInfo } from "../../ducks/user/types";
 
-export function* fetchDialogsRequest() {
+export function* fetchDialogsRequest({ payload }: FetchDialogsType) {
     try {
-        const data: DialogsInfoType[] = yield call(dialogsApi.getAll);
+        const data: DialogsInfoType[] = yield call(dialogsApi.getAll, payload);
         yield put(setDialogs(data));
     } catch (err) {
         console.log(err);

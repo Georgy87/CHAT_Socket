@@ -8,7 +8,7 @@ const initialState: DialogsStateType = {
     currentDialogId: window.location.pathname.split("dialog/")[1],
     isLoading: false,
     isPartnerOrGroup: false,
-    groupName: '',
+    dialogName: '',
 }
 
 const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: DialogsActionTypes) => {
@@ -16,14 +16,14 @@ const dialogsReducer = produce((draftState: Draft<DialogsStateType>, action: Dia
         case DialogsActionType.SET_ITEMS:
             draftState.items = action.payload;
             break;
-        case  DialogsActionType.SET_CURRENT_DIALOG_ID:
+        case DialogsActionType.SET_CURRENT_DIALOG_ID:
             draftState.currentDialogId = action.payload;
             break;
-        case  DialogsActionType.SET_CURRENT_STATUS:
+        case DialogsActionType.SET_CURRENT_STATUS:
             draftState.isPartnerOrGroup = action.payload;
             break;
-        case  DialogsActionType.SET_GROUP_NAME:
-            draftState.groupName = action.payload;
+        case DialogsActionType.SET_DIALOG_NAME:
+            draftState.dialogName = action.payload;
             break;
         default:
             break;

@@ -7,7 +7,7 @@ export enum DialogsActionType {
     FETCH_CREATE_DIALOG = "DIALOGS:FETCH_CREATE_DIALOG",
     SET_CURRENT_STATUS = "DIALOGS:SET_CURRENT_STATUS",
     FETCH_CREATE_GROUP_DIALOG = "DIALOGS:FETCH_CREATE_GROUP_DIALOG",
-    SET_GROUP_NAME = "DIALOGS:SET_GROUP_NAME"
+    SET_DIALOG_NAME = "DIALOGS:SET_DIALOG_NAME"
 }
 
 // state types
@@ -42,7 +42,7 @@ export type DialogsInfoType = {
     partner: UserInfo[];
     createdAt: string;
     updatedAt: string;
-    groupName: string;
+    dialogName: string;
     lastMessage: LastMessageType;
 }
 
@@ -51,7 +51,7 @@ export type DialogsStateType = {
     currentDialogId: string;
     isLoading: boolean;
     isPartnerOrGroup: boolean;
-    groupName: string;
+    dialogName: string;
 }
 
 // action types
@@ -71,8 +71,8 @@ export type SetCurrentStatusType = {
     payload: boolean;
 }
 
-export type SetGroupNameType = {
-    type: DialogsActionType.SET_GROUP_NAME;
+export type SetDialogNameType = {
+    type: DialogsActionType.SET_DIALOG_NAME;
     payload: string;
 }
 
@@ -80,11 +80,12 @@ export type SetGroupNameType = {
 
 export type FetchDialogsType = {
     type: DialogsActionType.FETCH_DIALOGS;
+    payload: string;
 }
 
 export type FetchCreateDialogType = {
     type: DialogsActionType.FETCH_CREATE_DIALOG;
-    payload: { partner: string; text: string; };
+    payload: { partner: string; text: string; partnerName: string };
 }
 
 export type FetchCreateGroupDialogType = {
@@ -93,7 +94,7 @@ export type FetchCreateGroupDialogType = {
 }
 
 
-export type DialogsActionTypes = SetDialogsType | SetCurrentDialogIdType | FetchDialogsType | SetCurrentStatusType | SetGroupNameType;
+export type DialogsActionTypes = SetDialogsType | SetCurrentDialogIdType | FetchDialogsType | SetCurrentStatusType | SetDialogNameType;
 
 
 
