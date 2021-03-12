@@ -1,6 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 import classNames from "classnames";
-import { LastMessageType } from "../../store/ducks/dialogs/types";
+import { LastMessageType, PartnerOrGroup } from "../../store/ducks/dialogs/types";
 import { UsergroupAddOutlined } from "@ant-design/icons";
 
 import readedSvg from "../../assets/img/readed.svg";
@@ -12,10 +13,12 @@ import { generateAvatarFromHash } from "../../utils/helpers";
 import IconReaded from "../IconReaded/index";
 import Avatar from "../Avatar/Avatar";
 import { Link, NavLink, useParams } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import actions from '../../redux/actions/dialogs';
 import { UserInfo } from "../../store/ducks/user/types";
 import { setCurrentDialogId, setCurrentStatus, setDialogName } from "../../store/ducks/dialogs/actions";
+import { selectIsPartnerOrGroup } from "../../store/ducks/dialogs/selectors";
+
 
 const getMessageTime = (created_at: Date) => {
     if (isToday(new Date(created_at))) {
@@ -35,6 +38,7 @@ export type PropsType = {
     partner: UserInfo[];
     author: UserInfo;
     dialogName: string;
+    isOnePartnerOrGroup: string;
     lastMessage: LastMessageType;
     userId?: string;
 }
@@ -47,54 +51,63 @@ const DialogItem: React.FC<PropsType> = ({
     author,
     lastMessage,
     dialogName,
+    isOnePartnerOrGroup,
     userId,
     createdAt
 }) => {
 
-   
-
     const dispatch = useDispatch();
 
     const isOnePartner = 1;
-    let partnersIsOnline = null;
-
-    if (partner.length === isOnePartner - 1) {
-        partnersIsOnline = partner.map(el => {
-            return el.isOnline;
-        });
-    }
+    // let partnersIsOnline = null;
 
     const partners = partner.map(el => {
         return el;
     });
 
+    // if (partner.length === isOnePartner - 1) {
+    //     partnersIsOnline = partner.map(el => {
+    //         return el.isOnline;
+    //     });
+    // }
+
     const onCurrentDialogInfo = () => {
         dispatch(setCurrentDialogId(_id));
 
-        if (dialogName) {
-            dispatch(setDialogName(dialogName));
+        if (author._id === userId) {
+            dispatch(setDialogName(partner[0].fullname));
+            //@ts-ignore
+            localStorage.setItem("partner", partner[0].fullname);
+        } else {
+            dispatch(setDialogName(author.fullname));
+            //@ts-ignore
+            localStorage.setItem("partner", author.fullname);
         }
 
-        dispatch(setCurrentStatus(partner.length > isOnePartner));
+        if (partners.length > isOnePartner && dialogName) {
+            dispatch(setDialogName(dialogName));
+            //@ts-ignore
+            localStorage.setItem("partner", dialogName);
+        }
     }
 
     return (
         <NavLink to={`/dialog/${_id}`}>
             <div
                 className={classNames("dialogs__item", {
-                    "dialogs__item--online": author._id === userId ? partnersIsOnline : author.isOnline,
+                    "dialogs__item--online": author._id === userId ? partner[0].isOnline : author.isOnline,
                     "dialogs__item--selected": currentDialogId === _id
                 })}
                 onClick={onCurrentDialogInfo}
             >
                 <div className="dialogs__item-avatar">
-                    {partners.length > isOnePartner ? <UsergroupAddOutlined /> :
+                    {PartnerOrGroup.IS_GROUP === isOnePartnerOrGroup ? <UsergroupAddOutlined /> :
                         <Avatar user={author._id === userId ? partners : author} />
                     }
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        <b>{partners.length > isOnePartner ? dialogName :
+                        <b>{PartnerOrGroup.IS_GROUP === isOnePartnerOrGroup ? dialogName :
                             author._id === userId ? partner[0].fullname : author.fullname}
                         </b>
                         <span>{getMessageTime(new Date(createdAt))}

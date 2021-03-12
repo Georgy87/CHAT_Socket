@@ -39,7 +39,7 @@ export const fetchDialogs = (): FetchDialogsType => {
     }
 }
 
-export const fetchCreateDialog = (payload: { partner: string; text: string; partnerName: string }): FetchCreateDialogType => {
+export const fetchCreateDialog = (payload: { partner: string; text: string; }): FetchCreateDialogType => {
     return {
         type: DialogsActionType.FETCH_CREATE_DIALOG,
         payload
@@ -53,10 +53,10 @@ export const fetchCreateGroupDialog = (payload: { partner: string; text: string;
     }
 }
 
-export const fetchDialogById = (payload: string): FetchDialogByIdType => {
-    return {
-        type: DialogsActionType.FETCH_DIALOG_BY_ID,
-        payload
-    }
-}
+// export const fetchDialogById = (payload: string): FetchDialogByIdType => {
+//     return {
+//         type: DialogsActionType.FETCH_DIALOG_BY_ID,
+//         payload
+//     }
+// }
 

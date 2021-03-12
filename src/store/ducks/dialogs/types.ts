@@ -11,6 +11,11 @@ export enum DialogsActionType {
     FETCH_DIALOG_BY_ID = "DIALOGS:FETCH_DIALOG_BY_ID"
 }
 
+export enum PartnerOrGroup {
+    IS_GROUP = "IS_GROUP",
+    IS_ONE_PARTNER = "IS_ONE_PARTNER",
+}
+
 // state types
 
 export type LastMessageType = {
@@ -44,6 +49,7 @@ export type DialogsInfoType = {
     createdAt: string;
     updatedAt: string;
     dialogName: string;
+    isOnePartnerOrGroup: string;
     lastMessage: LastMessageType;
 }
 
@@ -85,7 +91,7 @@ export type FetchDialogsType = {
 
 export type FetchCreateDialogType = {
     type: DialogsActionType.FETCH_CREATE_DIALOG;
-    payload: { partner: string; text: string; partnerName: string };
+    payload: { partner: string; text: string; };
 }
 
 export type FetchCreateGroupDialogType = {

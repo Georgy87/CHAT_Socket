@@ -33,7 +33,6 @@ const Sidebar = () => {
 
     const [messageText, setMessagaText] = useState("");
     const [selectedUserId, setSelectedUserId] = useState("");
-    const [partnerName, setPartnerName] = useState("");
 
     const options = users.map((user: UserInfo) => {
         return <Option key={user._id} >{user.fullname}</Option>
@@ -65,11 +64,10 @@ const Sidebar = () => {
 
     const onSelectUser = (value: any) => {
         setSelectedUserId(value.key);
-        setPartnerName(value.label);
     };
 
     const onAddDialog = () => {
-        dispatch(fetchCreateDialog({ partner: selectedUserId, text: messageText, partnerName: partnerName }));
+        dispatch(fetchCreateDialog({ partner: selectedUserId, text: messageText }));
         onClose();
     };
 
@@ -79,8 +77,6 @@ const Sidebar = () => {
             onClose();
         }
     }
-
-
 
     return (
         <div className="chat__sidebar">

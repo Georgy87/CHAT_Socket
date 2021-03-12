@@ -58,7 +58,7 @@ const Messages = () => {
                         return <Message
                             key={item._id}
                             {...item}
-                            isMe={user._id === item.user._id}
+                            isMe={user._id === item.user?._id}
                             onRemoveMessage={() => dispatch(fetchRemoveMessageById(item._id))}
                         />
                     })

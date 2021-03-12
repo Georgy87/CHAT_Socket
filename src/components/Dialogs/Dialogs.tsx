@@ -7,13 +7,13 @@ import { useEffect } from "react";
 
 import DialogItem from "../DialogItem/DialogItem";
 import socket from '../../core/socket';
-import { fetchDialogById, fetchDialogs, setCurrentDialogId } from '../../store/ducks/dialogs/actions';
-import { selectDialogItems, selectCurrentDialogId } from '../../store/ducks/dialogs/selectors';
+import { fetchDialogs, setCurrentDialogId } from '../../store/ducks/dialogs/actions';
+import { selectDialogItems, selectCurrentDialogId, selectIsPartnerOrGroup } from '../../store/ducks/dialogs/selectors';
 import { DialogsInfoType } from "../../store/ducks/dialogs/types";
 import { UserInfo } from "../../store/ducks/user/types";
+import { useParams } from "react-router";
 
 import "./Dialogs.scss";
-import { useParams } from "react-router";
 
 export type PropsType = {
     userId?: string;
@@ -23,59 +23,67 @@ const Dialogs: React.FC<PropsType> = ({ userId }) => {
     const dialogs = useSelector(selectDialogItems);
     const currentDialogId = useSelector(selectCurrentDialogId);
 
-    const params: { id: any} = useParams();
+    const params: { id: any } = useParams();
     const id = params.id;
 
     const dispatch = useDispatch();
 
     const [inputValue, setValue] = useState("");
-    // const [filtred, setFiltredItems] = useState(Array.from(dialogs));
+    const [filtred, setFiltredItems] = useState(Array.from(dialogs));
 
-    // const onChangeInput = (value = "") => {
-    //     setFiltredItems(
-    //         dialogs.filter(
-    //             (dialog: any) =>
-    //                 dialog.author.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
-    //                 0 ||
-    //                 dialog.partner.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
-    //                 0
-    //         )
-    //     );
-    //     setValue(value);
-    // };
+    const onChangeInput = (value = "") => {
+        setFiltredItems(
+            dialogs.filter(
+                (dialog) =>
+                    dialog.author.fullname.toLowerCase().indexOf(value.toLowerCase()) >=
+                    0
+                    ||
+                    dialog.partner[0].fullname.toLowerCase().indexOf(value.toLowerCase()) >=
+                    0
+                    ||
+                    dialog.dialogName && dialog.dialogName.toLowerCase().indexOf(value.toLowerCase()) >=
+                    0
+            )
+        );
+        setValue(value);
+    };
 
     const onNewDialog = () => {
         dispatch(fetchDialogs());
     };
 
-    // useEffect(() => {
-    //     if (dialogs.length) {
-    //         onChangeInput();
-    //     }
-    // }, [dialogs]);
+    useEffect(() => {
+        if (dialogs.length) {
+            onChangeInput();
+        }
+
+    }, [dialogs]);
+
 
     useEffect(() => {
         dispatch(fetchDialogs());
-        // dispatch(fetchDialogById(currentDialogId));
+
         socket.on("SERVER:DIALOG_CREATED", onNewDialog);
 
-        return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
+        // if (id) {
+        //     dispatch(fetchDialogById(id));
+        // }
+        return () => {
+            socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
+        };
     }, []);
 
-    useEffect(() => {
-        dispatch(fetchDialogById(id));
-    }, [id]);
 
     return (
         <div className="dialogs">
             <div className="dialogs__search">
                 <Input.Search
                     placeholder="Поиск среди контактов"
-                    // onChange={(e) => onChangeInput(e.target.value)}
+                    onChange={(e) => onChangeInput(e.target.value)}
                     value={inputValue}
                 />
             </div>
-            {dialogs ? dialogs.map((item: any) => {
+            {dialogs ? filtred.map((item: any) => {
                 return (
                     <DialogItem
                         key={item._id}
