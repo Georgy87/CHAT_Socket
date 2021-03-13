@@ -57,7 +57,7 @@ export type DialogsStateType = {
     items: DialogsInfoType[];
     currentDialogId: string;
     isLoading: boolean;
-    isPartnerOrGroup: boolean;
+    isPartnerOrGroup: string;
     dialogName: string;
 }
 
@@ -75,7 +75,7 @@ export type SetCurrentDialogIdType = {
 
 export type SetCurrentStatusType = {
     type: DialogsActionType.SET_CURRENT_STATUS;
-    payload: boolean;
+    payload: string;
 }
 
 export type SetDialogNameType = {

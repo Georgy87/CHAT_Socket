@@ -89,6 +89,8 @@ const DialogItem: React.FC<PropsType> = ({
             //@ts-ignore
             localStorage.setItem("partner", dialogName);
         }
+
+        dispatch(setCurrentStatus(isOnePartnerOrGroup));
     }
 
     return (

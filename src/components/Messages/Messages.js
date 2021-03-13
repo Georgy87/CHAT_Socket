@@ -6,11 +6,13 @@ import classNames from "classnames";
 
 import Message from '../Message/Message';
 import socket from "../../core/socket";
+import { fetchDialogs } from "../../store/ducks/dialogs/actions";
 import { fetchMessages, fetchRemoveMessageById } from '../../store/ducks/messages/actions';
-
 import actions from '../../redux/actions/messages';
 
 import "./Messages.scss";
+import ChatInput from "../ChatInput/ChatInput";
+
 
 const Messages = () => {
     const dialogs = useSelector(state => state.dialogs);
@@ -24,9 +26,8 @@ const Messages = () => {
     const messagesRef = useRef(null);
 
     const onNewMessage = data => {
-        if (data.dialog && currentDialogId === data.dialog._id) {
-            dispatch(actions.addMessage(data));
-        }
+        dispatch(actions.addMessage(data));
+        dispatch(fetchDialogs());
     };
 
     useEffect(() => {
@@ -39,8 +40,11 @@ const Messages = () => {
         return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
     }, [currentDialogId]);
 
+
     useEffect(() => {
         messagesRef.current.scrollTo(0, 999999);
+        console.log(items);
+
     }, [items]);
 
     return (
@@ -50,6 +54,7 @@ const Messages = () => {
                 "messages--loading": isLoading,
             })}
         >
+            <div className="messages__wrapper">
             {isLoading ? (
                 <Spin size="large" tip="Загрузка сообщений..." />
             ) : items && !isLoading ? (
@@ -63,11 +68,15 @@ const Messages = () => {
                         />
                     })
                 ) : (
-                        <Empty description="Диалог пуст" />
-                    )
+                    <Empty description="Диалог пуст" />
+                )
             ) : (
-                        <Empty description="Откройте диалог" />
-                    )}
+                <Empty description="Откройте диалог" />
+            )}
+            </div>
+            <div className="messages__dialog-input">
+                <ChatInput />
+            </div>
         </div>
     );
 };

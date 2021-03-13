@@ -7,7 +7,7 @@ const initialState: DialogsStateType = {
     items: [],
     currentDialogId: window.location.pathname.split("dialog/")[1],
     isLoading: false,
-    isPartnerOrGroup: false,
+    isPartnerOrGroup: '',
     dialogName: '',
 }
 

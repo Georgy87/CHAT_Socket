@@ -17,7 +17,7 @@ export const setCurrentDialogId = (payload: string): SetCurrentDialogIdType => {
     }
 }
 
-export const setCurrentStatus = (payload: boolean): SetCurrentStatusType => {
+export const setCurrentStatus = (payload: string): SetCurrentStatusType => {
     return {
         type: DialogsActionType.SET_CURRENT_STATUS,
         payload
