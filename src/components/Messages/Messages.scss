@@ -1,5 +1,6 @@
 .messages {
     height: 100%;
+
     padding: 20px;
     padding-bottom: 0;
     &--loading {
@@ -8,7 +9,8 @@
         justify-content: center;
     }
     &__wrapper {
-        height: 60%;
+        height: 75%;
+        margin-top: 30px;
         overflow: auto;
     }
 }

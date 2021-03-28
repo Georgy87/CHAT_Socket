@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
-import { Auth, Home } from "./pages";
+import Home from "./pages/Home/Home";
 import { useSelector } from "react-redux";
 import { Route, Redirect, Switch, useHistory } from "react-router-dom";
+
+import Auth from './pages/Auth/index';
+
+import "./App.css";
 
 const App = () => {
     const isAuth = useSelector(state => state.user.isAuth);

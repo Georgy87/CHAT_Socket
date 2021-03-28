@@ -13,7 +13,6 @@ import actions from '../../redux/actions/messages';
 import "./Messages.scss";
 import ChatInput from "../ChatInput/ChatInput";
 
-
 const Messages = () => {
     const dialogs = useSelector(state => state.dialogs);
     const currentDialogId = useSelector(state => state.dialogs.currentDialogId);
@@ -27,7 +26,6 @@ const Messages = () => {
 
     const onNewMessage = data => {
         dispatch(actions.addMessage(data));
-        dispatch(fetchDialogs());
     };
 
     useEffect(() => {
@@ -43,7 +41,6 @@ const Messages = () => {
 
     useEffect(() => {
         messagesRef.current.scrollTo(0, 999999);
-        console.log(items);
 
     }, [items]);
 

@@ -19,7 +19,6 @@ import { UserInfo } from "../../store/ducks/user/types";
 import { setCurrentDialogId, setCurrentStatus, setDialogName } from "../../store/ducks/dialogs/actions";
 import { selectIsPartnerOrGroup } from "../../store/ducks/dialogs/selectors";
 
-
 const getMessageTime = (created_at: Date) => {
     if (isToday(new Date(created_at))) {
         return format(created_at, "HH:mm");

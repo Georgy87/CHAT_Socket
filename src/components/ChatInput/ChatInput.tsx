@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Button, Input } from "antd";
+import { AudioOutlined, CameraOutlined, SmileOutlined } from "@ant-design/icons";
 //@ts-ignore
 import { UploadField } from "@navjobs/upload";
 import { Picker } from "emoji-mart";
@@ -30,19 +31,38 @@ const ChatInput = () => {
         }
     };
 
+    const addEmoji = ({ colons }: any) => {
+        setValue((value + ' ' + colons).trim());
+    };
+
+    const handleOutsideClick = (el: any, e: any) => {
+        if (el && !el.contains(e.target)) {
+            setShowEmojiPicker(false);
+        }
+    };
+
+    useEffect(() => {
+        const el = document.querySelector('.chat-input__smile-btn');
+        document.addEventListener('click', handleOutsideClick.bind(this, el));
+
+        return () => {
+            document.removeEventListener('click', handleOutsideClick.bind(this, el));
+        };
+    }, []);
+
     return (
         <div className="chat-input">
             <div className="chat-input__smile-btn">
                 {emojiPickerVisible && (
                     <div className="chat-input__emoji-picker">
-                        <Picker set="apple" />
+                        <Picker set="apple" onSelect={emojiTag => addEmoji(emojiTag)} />
                     </div>
                 )}
                 <Button
                     onClick={toggleEmojiPicker}
                     type="link"
                     shape="circle"
-                    icon="smile"
+                    icon={<SmileOutlined />}
                 />
             </div>
             <Input
@@ -63,12 +83,12 @@ const ChatInput = () => {
                         multiple: "multiple",
                     }}
                 >
-                    <Button type="link" shape="circle" icon="camera" />
+                    <Button type="link" icon={<CameraOutlined />} />
                 </UploadField>
                 {value ? (
-                    <Button type="link" shape="circle" icon="check-circle" />
+                    <Button type="link" shape="circle" icon={<SmileOutlined />} />
                 ) : (
-                    <Button type="link" shape="circle" icon="audio" />
+                    <Button type="link" shape="circle" icon={<AudioOutlined />} />
                 )}
             </div>
         </div>

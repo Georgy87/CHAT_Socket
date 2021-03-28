@@ -4,6 +4,8 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import ruLocale from "date-fns/locale/ru";
 import classNames from "classnames";
 import { EllipsisOutlined } from "@ant-design/icons";
+import { Emoji } from 'emoji-mart';
+import reactStringReplace from 'react-string-replace';
 
 import readedSvg from "../../assets/img/readed.svg";
 import noReadedSvg from "../../assets/img/noreaded.svg";
@@ -80,8 +82,8 @@ const MessageAudio = ({ audioSrc }) => {
                         {isPlaying ? (
                             <img src={pauseSvg} alt="Pause svg" />
                         ) : (
-                                <img src={playSvg} alt="Play svg" />
-                            )}
+                            <img src={playSvg} alt="Play svg" />
+                        )}
                     </button>
                 </div>
                 <div className="message__audio-wave">
@@ -107,6 +109,7 @@ const Message = ({
     audio,
     onRemoveMessage
 }) => {
+    
     return (
         <div
             className={classNames("message", {
@@ -124,12 +127,12 @@ const Message = ({
                         className="message__icon-readed"
                     />
                 ) : (
-                        <img
-                            src={noReadedSvg}
-                            alt="Checked icon"
-                            className="message__icon-readed message__icon-readed--no"
-                        />
-                    )}
+                    <img
+                        src={noReadedSvg}
+                        alt="Checked icon"
+                        className="message__icon-readed message__icon-readed--no"
+                    />
+                )}
                 <Popover
                     content={
                         <div>
@@ -143,7 +146,7 @@ const Message = ({
                             type="link"
                             shape="circle"
                             icon={<EllipsisOutlined />}
-                            style={{ fontSize: "20px" }}
+                            style={{ fontSize: "20px", marginBottom: 10 }}
                         />
                     </div>
                 </Popover>
@@ -154,7 +157,11 @@ const Message = ({
                 <div className="message__info">
                     {(audio || text || isTyping) && (
                         <div className="message__bubble">
-                            {text && <p className="message__text">{text}</p>}
+                            {text && <p className="message__text">
+                                {reactStringReplace(text, /:(.+?):/g, (match, i) => (
+                                    <Emoji key={i} emoji={match} set="apple" size={16} />
+                                ))}
+                            </p>}
                             {isTyping && (
                                 <div className="message__typing">
                                     <span />
